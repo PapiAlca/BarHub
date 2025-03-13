@@ -1,2 +1,2 @@
 # BarHub
-Este es el repositorio de ni TFC BarHub.
+Este es el repositorio de mi TFC BarHub.
