@@ -14,14 +14,23 @@ import java.time.Instant;
 @Setter
 @Data
 @Entity
-@Table(name="mesas")
-public class Mesa {
+@Table(name="productos")
+public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique=true, nullable=false)
-    private String codigoQR;
+    private String nombre;
+
+    @Column
+    private String descripcion;
+
+    @Column
+    private Double precio;
+
+    @Column
+    private String imagen;
 
     @Column
     @Enumerated(EnumType.STRING)

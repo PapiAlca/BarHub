@@ -1,0 +1,20 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: barhub-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: castelar
+      MYSQL_DATABASE: barhub
+      MYSQL_USER: juan
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "33060:3306"
+
+volumes:
+  mysql_data:
+
+networks:
+  mi_red:
+    driver: bridge
