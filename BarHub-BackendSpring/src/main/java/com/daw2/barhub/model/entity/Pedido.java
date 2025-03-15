@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
 
-/*
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -42,11 +41,11 @@ public class Pedido {
 
     @Column(precision = 10, scale = 2)
     @Digits(integer = 10, fraction = 2)
-    private BigDecimal precioUnitario;
+    private BigDecimal precioTotal;
 
     @CreationTimestamp
     private Instant createdAt;
 
     @UpdateTimestamp
     private Instant updatedAt;
-} */
+}

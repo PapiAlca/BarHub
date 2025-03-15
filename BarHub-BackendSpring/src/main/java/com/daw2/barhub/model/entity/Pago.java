@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 
-/*
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -39,7 +38,7 @@ public class Pago {
 
     @Column(precision = 10, scale = 2)
     @Digits(integer = 10, fraction = 2)
-    private BigDecimal precioUnitario;
+    private BigDecimal total;
 
     @Column
     private LocalDate fechaPago;
@@ -49,4 +48,4 @@ public class Pago {
 
     @UpdateTimestamp
     private Instant updatedAt;
-} */
+}

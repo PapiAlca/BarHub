@@ -9,7 +9,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 
-/*
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -41,4 +40,4 @@ public class SesionQR {
 
     @UpdateTimestamp
     private Instant updatedAt;
-} */
+}

@@ -6,7 +6,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
-/*
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -33,4 +32,4 @@ public class DetallePedido {
     @Column(precision = 10, scale = 2)
     @Digits(integer = 10, fraction = 2)
     private BigDecimal precioUnitario;
-} */
+}
