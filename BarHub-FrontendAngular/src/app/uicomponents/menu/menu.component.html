@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #0a2342; color: #f1f2f6;">
+    <div class="container-fluid ms-5 me-5">
+        <!-- Enlace al dashboard -->
+        <a class="navbar-brand" routerLink="home" style="color: #f1f2f6;">BarHub</a>
+
+        <!-- Menú desplegable -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto">
+                <!-- Cuadro de mandos -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="home" aria-current="page" style="color: #f1f2f6;">Inicio</a>
+                </li>
+                <!-- General -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="home/dashboard" style="color: #f1f2f6;">General</a>
+                </li>
+                <!-- Cuadro de mandos para Admin -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="admin" style="color: #f1f2f6;">Admin</a>
+                </li>
+            </ul>
+
+            <!-- Login / Logout-->
+            <a class="nav-link ms-auto" routerLink="auth" style="color: #f1f2f6;">Iniciar sesión</a>
+
+            <div>
+                <!-- <a *ngIf="sesionIniciada" class="nav-link ms-auto" routerLink="auth" style="color: #f1f2f6;" (click)="cerrarSesion()">Cerrar sesión</a> -->
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #f1f2f6;">
+                            <i class="bi bi-person-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                          <li><a class="dropdown-item">Perfil</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item">Cerrar sesión</a>
+                        </ul>
+                      </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</nav>
