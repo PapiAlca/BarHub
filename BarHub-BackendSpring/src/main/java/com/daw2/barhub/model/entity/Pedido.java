@@ -2,6 +2,7 @@ package com.daw2.barhub.model.entity;
 
 import com.daw2.barhub.auth.models.User;
 import com.daw2.barhub.model.Enum.EstadoPedido;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import lombok.*;
@@ -48,4 +49,14 @@ public class Pedido {
 
     @UpdateTimestamp
     private Instant updatedAt;
+
+    @JsonProperty("userId")
+    public Long getUserId() {
+        return (user != null) ? user.getId() : null;
+    }
+
+    @JsonProperty("mesaId")
+    public Long getMesaId() {
+        return (mesa != null) ? mesa.getId() : null;
+    }
 }

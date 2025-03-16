@@ -1,5 +1,6 @@
 package com.daw2.barhub.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import lombok.*;
@@ -29,7 +30,8 @@ public class DetallePedido {
     @Column
     private Integer cantidad;
 
-    @Column(precision = 10, scale = 2)
+    @Column(precision = 10, scale = 2, nullable = false)
     @Digits(integer = 10, fraction = 2)
+    @JsonProperty("precio_unitario")
     private BigDecimal precioUnitario;
 }

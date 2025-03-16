@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SesionQRRepository extends JpaRepository<SesionQR, Long> {
     SesionQR findById(long id);
+
+    SesionQR findSesionQRById(long id);
 }

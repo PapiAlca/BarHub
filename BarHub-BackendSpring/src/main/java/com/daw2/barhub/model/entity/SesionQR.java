@@ -1,6 +1,7 @@
 package com.daw2.barhub.model.entity;
 
 import com.daw2.barhub.auth.models.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,6 +34,7 @@ public class SesionQR {
     private String token;
 
     @Column
+    @JsonProperty("fecha_sesion")
     private LocalDate fechaSesion;
 
     @CreationTimestamp
