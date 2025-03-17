@@ -5,7 +5,7 @@ spring:
   application:
     name: BarHub
   datasource:
-    url: jdbc:mysql://127.0.0.1:33060/barhub
+    url: jdbc:mysql://4.212.242.156:33060/barhub
     username: juan
     password: 1234
     driverClassName: com.mysql.cj.jdbc.Driver
