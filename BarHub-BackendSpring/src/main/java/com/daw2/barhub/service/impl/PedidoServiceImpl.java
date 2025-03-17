@@ -2,6 +2,7 @@ package com.daw2.barhub.service.impl;
 
 import com.daw2.barhub.auth.models.User;
 import com.daw2.barhub.auth.repository.UserRepository;
+import com.daw2.barhub.model.dto.PedidoDto;
 import com.daw2.barhub.model.entity.Mesa;
 import com.daw2.barhub.model.entity.Pedido;
 import com.daw2.barhub.model.repository.MesaRepository;
@@ -59,6 +60,13 @@ public class PedidoServiceImpl implements PedidoService {
             if (entity.getUser() != null && entity.getUser().getId() != null) {
                 User usuario = userRepository.findById(entity.getUser().getId())
                         .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                //pedidoExistente.setUserId(getUserId());
+
+                //PedidoDto pedidoDto = new PedidoDto();
+
+                //pedidoDto.setId(id);
+                //Long idUser = pedidoDto.setIdUser(pedidoExistente.getUser().getId());
+
                 pedidoExistente.setUser(usuario);
             }
 

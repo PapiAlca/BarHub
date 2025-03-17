@@ -1,9 +1,7 @@
 package com.daw2.barhub.controller;
 
 import com.daw2.barhub.model.dto.ErrorDto;
-import com.daw2.barhub.model.dto.PagoDto;
 import com.daw2.barhub.model.dto.SesionQRDto;
-import com.daw2.barhub.model.entity.Pago;
 import com.daw2.barhub.model.entity.SesionQR;
 import com.daw2.barhub.service.SesionQRService;
 import lombok.extern.slf4j.Slf4j;
