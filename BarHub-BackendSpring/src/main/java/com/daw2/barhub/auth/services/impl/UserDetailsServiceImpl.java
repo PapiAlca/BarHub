@@ -1,6 +1,5 @@
 package com.daw2.barhub.auth.services.impl;
 
-/*
 import com.daw2.barhub.auth.models.User;
 import com.daw2.barhub.auth.repository.UserRepository;
 import com.daw2.barhub.auth.services.UserDetailsImpl;
@@ -26,4 +25,3 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   }
 
 }
-*/

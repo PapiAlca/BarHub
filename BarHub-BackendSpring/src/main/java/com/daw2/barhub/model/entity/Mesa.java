@@ -21,7 +21,7 @@ public class Mesa {
     private Long id;
 
     @Column(unique=true, nullable=false)
-    private String codigoQR;
+    private String codigoqr;
 
     @Column
     @Enumerated(EnumType.STRING)

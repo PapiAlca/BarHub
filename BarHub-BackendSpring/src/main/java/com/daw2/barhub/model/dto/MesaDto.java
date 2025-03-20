@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class MesaDto {
     private Long id;
-    private String codigoQR;
+    private String codigoqr;
     private EstadoMesa estado;
 
     public static MesaDto from(Mesa mesa) {
@@ -23,7 +23,7 @@ public class MesaDto {
         if (mesa != null) {
             dto = new MesaDto();
             dto.setId(mesa.getId());
-            dto.setCodigoQR(mesa.getCodigoQR());
+            dto.setCodigoqr(mesa.getCodigoqr());
             dto.setEstado(mesa.getEstado());
         }
 
@@ -47,7 +47,7 @@ public class MesaDto {
         Mesa mesa = new Mesa();
 
         mesa.setId(this.id);
-        mesa.setCodigoQR(this.codigoQR);
+        mesa.setCodigoqr(this.codigoqr);
         mesa.setEstado(this.estado);
 
         return mesa;

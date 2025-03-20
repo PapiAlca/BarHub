@@ -1,6 +1,6 @@
-INSERT INTO users (username, password, email) VALUES ('admin', '$2a$10$Xkke58xNNYNEEd4.MiT1M.jS.E3SQ/uH5r.3oGQqcZUE5hKdh2ZHW', 'admin@gmail.com');
-INSERT INTO users (username, password, email) VALUES ('cliente', '$2a$10$Xkke58xNNYNEEd4.MiT1M.jS.E3SQ/uH5r.3oGQqcZUE5hKdh2ZHW', 'cliente@gmail.com');
-INSERT INTO users (username, password, email) VALUES ('emple', '$2a$10$Xkke58xNNYNEEd4.MiT1M.jS.E3SQ/uH5r.3oGQqcZUE5hKdh2ZHW', 'emple@gmail.com');
+INSERT INTO users (username, password, email) VALUES ('admin', '$2a$10$plfR9bHhR4hb0O1zo3x2E.PTSc5IcWwxl3ud4qYUmne8eDYdubuK2', 'admin@gmail.com');
+INSERT INTO users (username, password, email) VALUES ('cliente', '$2a$10$plfR9bHhR4hb0O1zo3x2E.PTSc5IcWwxl3ud4qYUmne8eDYdubuK2', 'cliente@gmail.com');
+INSERT INTO users (username, password, email) VALUES ('emple', '$2a$10$plfR9bHhR4hb0O1zo3x2E.PTSc5IcWwxl3ud4qYUmne8eDYdubuK2', 'emple@gmail.com');
 
 INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
 INSERT INTO roles (name) VALUES ('ROLE_CLIENTE');

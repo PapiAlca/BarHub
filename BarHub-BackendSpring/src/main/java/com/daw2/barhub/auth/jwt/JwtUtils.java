@@ -1,7 +1,6 @@
 package com.daw2.barhub.auth.jwt;
 
-/*
-import com.daw2.controljuanparejogarcia.auth.services.UserDetailsImpl;
+import com.daw2.barhub.auth.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
@@ -62,4 +61,3 @@ public class JwtUtils {
     return false;
   }
 }
-*/

@@ -45,7 +45,7 @@ public class MesaServiceImpl implements MesaService {
         Mesa mesaExistente = mesaRepository.findById(id);
 
         if(mesaExistente!= null) {
-            mesaExistente.setCodigoQR(entity.getCodigoQR());
+            mesaExistente.setCodigoqr(entity.getCodigoqr());
             mesaExistente.setEstado(entity.getEstado());
             return mesaRepository.save(mesaExistente);
         } else {

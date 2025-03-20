@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 @RestController
 @RequestMapping("/mesas")
@@ -36,7 +36,7 @@ public class MesaController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<?> show(@PathVariable Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(mesaService.findById(id));
@@ -45,7 +45,7 @@ public class MesaController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Mesa mesa) {
         try {
             Mesa mesaActualizada =  mesaService.update(id, mesa);
@@ -55,7 +55,7 @@ public class MesaController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             mesaService.delete(id);

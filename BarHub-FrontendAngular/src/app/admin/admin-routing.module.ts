@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RegistroComponent } from '../auth/register/register.component';
+import { LoginComponent } from '../auth/login/login.component';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { EditarMesaComponent } from './pages/mesas/editar-mesas/editar-mesas.component';
-import { GestionarMesaComponent } from './pages/mesas/gestionar-mesas/gestionar-mesas.component';
+import { GestionarMesaComponent } from './pages/mesas/gestionar-mesas/gestionar-mesa.component';
 import { VerMesaComponent } from './pages/mesas/ver-mesa/ver-mesa.component';
 
 const routes: Routes = [
@@ -14,9 +16,20 @@ const routes: Routes = [
         component: BienvenidaComponent
       },
 
+      // Auth
+      {
+        path: 'register',
+        component: RegistroComponent,
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      
+
       // Mesas
       {
-        path: 'crear-mesas',
+        path: 'crear-mesa',
         component: EditarMesaComponent,
       },
       {
@@ -31,6 +44,8 @@ const routes: Routes = [
         path: 'ver-mesa/:id',
         component: VerMesaComponent
       },
+
+      
 
       {
         path: '**',

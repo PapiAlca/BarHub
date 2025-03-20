@@ -1,6 +1,5 @@
 package com.daw2.barhub.auth.jwt;
 
-/*
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,4 +61,3 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     return null;
   }
 }
-*/

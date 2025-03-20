@@ -1,17 +1,16 @@
 package com.daw2.barhub.auth.controllers;
 
-/*
-import com.daw2.controljuanparejogarcia.auth.jwt.JwtUtils;
-import com.daw2.controljuanparejogarcia.auth.models.Role;
-import com.daw2.controljuanparejogarcia.auth.models.RoleEnum;
-import com.daw2.controljuanparejogarcia.auth.models.User;
-import com.daw2.controljuanparejogarcia.auth.payload.request.LoginRequest;
-import com.daw2.controljuanparejogarcia.auth.payload.request.SignupRequest;
-import com.daw2.controljuanparejogarcia.auth.payload.response.JwtResponse;
-import com.daw2.controljuanparejogarcia.auth.payload.response.MessageResponse;
-import com.daw2.controljuanparejogarcia.auth.repository.RoleRepository;
-import com.daw2.controljuanparejogarcia.auth.repository.UserRepository;
-import com.daw2.controljuanparejogarcia.auth.services.UserDetailsImpl;
+import com.daw2.barhub.auth.jwt.JwtUtils;
+import com.daw2.barhub.auth.models.Role;
+import com.daw2.barhub.auth.models.RoleEnum;
+import com.daw2.barhub.auth.models.User;
+import com.daw2.barhub.auth.payload.request.LoginRequest;
+import com.daw2.barhub.auth.payload.request.SignupRequest;
+import com.daw2.barhub.auth.payload.response.JwtResponse;
+import com.daw2.barhub.auth.payload.response.MessageResponse;
+import com.daw2.barhub.auth.repository.RoleRepository;
+import com.daw2.barhub.auth.repository.UserRepository;
+import com.daw2.barhub.auth.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/auth")
 ///api/auth
 public class AuthController {
   @Autowired
@@ -47,29 +46,28 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
-*/
   /*
   {"username": "us01", "password":"1234"}
-   */ /*
+   */
   @PostMapping("/login")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
     Authentication authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+            new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
-    
+
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
     List<String> roles = userDetails.getAuthorities().stream()
-        .map(item -> item.getAuthority())
-        .collect(Collectors.toList());
+            .map(item -> item.getAuthority())
+            .collect(Collectors.toList());
 
     return ResponseEntity.ok(new JwtResponse(jwt,
-                         userDetails.getId(), 
-                         userDetails.getUsername(), 
-                         userDetails.getEmail(), 
-                         roles));
+            userDetails.getId(),
+            userDetails.getUsername(),
+            userDetails.getEmail(),
+            roles));
   }
 
   @PostMapping("/signup")
@@ -127,4 +125,3 @@ public class AuthController {
     return ResponseEntity.ok(new MessageResponse("¡El usuario ha sido registrado!"));
   }
 }
-*/

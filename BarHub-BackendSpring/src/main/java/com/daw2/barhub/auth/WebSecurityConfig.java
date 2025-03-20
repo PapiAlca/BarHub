@@ -1,6 +1,5 @@
 package com.daw2.barhub.auth;
 
-/*
 import com.daw2.barhub.auth.jwt.AuthEntryPointJwt;
 import com.daw2.barhub.auth.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,4 +74,3 @@ public class WebSecurityConfig {
     return http.build();
   }
 }
-*/

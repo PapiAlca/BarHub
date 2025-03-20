@@ -1,6 +1,5 @@
 package com.daw2.barhub.auth.services;
 
-/*
 import com.daw2.barhub.auth.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -84,4 +83,3 @@ public class UserDetailsImpl implements UserDetails {
     return Objects.equals(id, user.id);
   }
 }
-*/
