@@ -22,20 +22,22 @@ public class UsuarioDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private List<String> roles;
     private boolean habilitado;
+    private List<String> roles;
 
     public static UsuarioDto from(User user) {
         UsuarioDto dto = new UsuarioDto();
         dto.setId(user.getId());
         dto.setNombre(user.getUsername());
         dto.setEmail(user.getEmail());
+        dto.setHabilitado(user.isEnabled());
+
         dto.setRoles(
                 user.getRoles().stream()
                         .map(role -> role.getName().name())
                         .collect(Collectors.toList())
         );
-        dto.setHabilitado(user.isEnabled());
+
         return dto;
     }
 

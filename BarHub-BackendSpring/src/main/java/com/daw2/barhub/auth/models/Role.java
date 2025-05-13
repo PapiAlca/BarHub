@@ -34,11 +34,11 @@ public class Role {
   @UpdateTimestamp
   private Instant updatedAt;
 
-  public String getNombre() {
-    return name.toString();
-  }
-
   @ManyToMany(mappedBy = "roles")
-  @JsonBackReference
+  @JsonIgnore
   private Set<User> users = new HashSet<>();
+
+  public String getNombre() {
+    return name != null ? name.name() : "";
+  }
 }

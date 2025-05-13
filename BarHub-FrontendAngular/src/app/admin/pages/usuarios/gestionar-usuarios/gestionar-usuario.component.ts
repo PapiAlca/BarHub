@@ -24,10 +24,12 @@ export class GestionarUsuarioComponent implements OnInit {
   cargarUsuarios() {
     this.usuarioService.get().subscribe({
       next: (usuarios) => {
-        console.log('Usuarios cargados:', usuarios);
         this.usuarios = usuarios;
       },
-      error: (err) => console.error('Error cargando usuarios:', err)
+      error: (err) => {
+        console.error('Error cargando usuarios:', err);
+        this.dialogService.mostrarToast('Error al cargar usuarios');
+      }
     });
   }
 

@@ -1,9 +1,9 @@
 package com.daw2.barhub.controller;
 
+import com.daw2.barhub.auth.services.UserService;
 import com.daw2.barhub.model.dto.ErrorDto;
 import com.daw2.barhub.model.dto.UsuarioDto;
 import com.daw2.barhub.auth.models.User;
-import com.daw2.barhub.auth.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,15 @@ import java.util.List;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired // No es necesario si usas Lombok @RequiredArgsConstructor
+    public UsuarioController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<?> index() {
