@@ -1,15 +1,19 @@
 package com.daw2.barhub.auth.controllers;
 
+
 import com.daw2.barhub.auth.jwt.JwtUtils;
 import com.daw2.barhub.auth.models.Role;
 import com.daw2.barhub.auth.models.RoleEnum;
 import com.daw2.barhub.auth.models.User;
+import com.daw2.barhub.auth.models.VerificationToken;
 import com.daw2.barhub.auth.payload.request.LoginRequest;
 import com.daw2.barhub.auth.payload.request.SignupRequest;
 import com.daw2.barhub.auth.payload.response.JwtResponse;
 import com.daw2.barhub.auth.payload.response.MessageResponse;
 import com.daw2.barhub.auth.repository.RoleRepository;
 import com.daw2.barhub.auth.repository.UserRepository;
+import com.daw2.barhub.auth.repository.VerificationTokenRepository;
+import com.daw2.barhub.auth.services.EmailService;
 import com.daw2.barhub.auth.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +25,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.Instant;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -41,10 +44,17 @@ public class AuthController {
   RoleRepository roleRepository;
 
   @Autowired
+  VerificationTokenRepository verificationTokenRepository;
+
+  @Autowired
+  EmailService emailService;
+
+  @Autowired
   PasswordEncoder encoder;
 
   @Autowired
   JwtUtils jwtUtils;
+
 
   /*
   {"username": "us01", "password":"1234"}
@@ -72,56 +82,93 @@ public class AuthController {
 
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse("Error: ¡El nombre de usuario ya está en uso!"));
+              .badRequest()
+              .body(new MessageResponse("Error: ¡El nombre de usuario ya está en uso!"));
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
       return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse("Error: ¡El email de usuario ya está en uso!"));
+              .badRequest()
+              .body(new MessageResponse("Error: ¡El email de usuario ya está en uso!"));
     }
 
-    // Create new user's account
-    User user = new User(signUpRequest.getUsername(),
-               signUpRequest.getEmail(),
-               encoder.encode(signUpRequest.getPassword()));
+    // Crear nuevo usuario
+    User user = new User(
+            signUpRequest.getUsername(),
+            signUpRequest.getEmail(),
+            encoder.encode(signUpRequest.getPassword())
+    );
+
+    // Marcar usuario como NO VERIFICADO
+    user.setEnabled(false);
 
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
 
     if (strRoles == null) {
-      Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER)
-          .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+      Role userRole = roleRepository.findByName(RoleEnum.ROLE_CLIENTE)
+              .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
       roles.add(userRole);
     } else {
       strRoles.forEach(role -> {
         switch (role) {
-        case "admin":
-          Role adminRole = roleRepository.findByName(RoleEnum.ROLE_ADMIN)
-              .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
-          roles.add(adminRole);
-
-          break;
-        case "emple":
-          Role modRole = roleRepository.findByName(RoleEnum.ROLE_EMPLEADO)
-              .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
-          roles.add(modRole);
-
-          break;
-        default:
-          Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER)
-              .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
-          roles.add(userRole);
+          case "admin":
+            Role adminRole = roleRepository.findByName(RoleEnum.ROLE_ADMIN)
+                    .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+            roles.add(adminRole);
+            break;
+          case "emple":
+            Role modRole = roleRepository.findByName(RoleEnum.ROLE_EMPLEADO)
+                    .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+            roles.add(modRole);
+            break;
+          default:
+            Role userRole = roleRepository.findByName(RoleEnum.ROLE_CLIENTE)
+                    .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+            roles.add(userRole);
         }
       });
     }
 
     user.setRoles(roles);
+
     userRepository.save(user);
 
-    return ResponseEntity.ok(new MessageResponse("¡El usuario ha sido registrado!"));
+    // Generar y guardar token de verificación
+    String token = UUID.randomUUID().toString();
+    VerificationToken verificationToken = new VerificationToken(token, user);
+    verificationTokenRepository.save(verificationToken);
+
+    // Enviar el email
+    emailService.sendVerificationEmail(user.getEmail(), token);
+
+    return ResponseEntity.ok(new MessageResponse("Usuario registrado correctamente. Por favor, verifica tu email."));
+  }
+
+  @GetMapping("/verify")
+  public ResponseEntity<?> verifyUser(@RequestParam("token") String token) {
+    Optional<VerificationToken> optionalToken = verificationTokenRepository.findByToken(token);
+
+    if (optionalToken.isEmpty()) {
+      return ResponseEntity.badRequest().body("Token inválido");
+    }
+
+    VerificationToken verificationToken = optionalToken.get();
+
+    // Verificar si expiró
+    if (verificationToken.getExpiryDate().isBefore(Instant.now())) {
+      return ResponseEntity.badRequest().body("Token expirado");
+    }
+
+    User user = verificationToken.getUser();
+    user.setEnabled(true);
+    userRepository.save(user);
+
+    verificationTokenRepository.delete(verificationToken);
+
+    return ResponseEntity.ok("Usuario verificado correctamente");
   }
 }

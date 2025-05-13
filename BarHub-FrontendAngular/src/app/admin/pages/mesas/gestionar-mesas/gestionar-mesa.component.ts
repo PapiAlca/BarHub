@@ -35,6 +35,7 @@ export class GestionarMesaComponent implements OnInit {
       this.mesaService.del(mesa)
         .subscribe(() => {
           this.dialogService.mostrarToast('Mesa eliminada correctamente');
+          this.cargarMesas();
         });
     });
   }

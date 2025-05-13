@@ -9,14 +9,26 @@ import { UicomponentsModule } from '../uicomponents/uicomponents.module';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { GestionarMesaComponent } from './pages/mesas/gestionar-mesas/gestionar-mesa.component';
 import { VerMesaComponent } from './pages/mesas/ver-mesa/ver-mesa.component';
-import { EditarMesaComponent } from './pages/mesas/editar-mesas/editar-mesas.component'
+import { EditarMesaComponent } from './pages/mesas/editar-mesas/editar-mesas.component';
+import { GestionarProductoComponent } from './pages/productos/gestionar-productos/gestionar-producto.component';
+import { VerProductoComponent } from './pages/productos/ver-producto/ver-producto.component';
+import { EditarProductoComponent } from './pages/productos/editar-productos/editar-productos.component';
+import { GestionarUsuarioComponent } from './pages/usuarios/gestionar-usuarios/gestionar-usuario.component';
+import { VerUsuarioComponent } from './pages/usuarios/ver-usuario/ver-usuario.component';
+import { EditarUsuarioComponent } from './pages/usuarios/editar-usuarios/editar-usuarios.component';
 
 @NgModule({
   declarations: [
     BienvenidaComponent,
     GestionarMesaComponent,
     VerMesaComponent,
-    EditarMesaComponent
+    EditarMesaComponent,
+    GestionarProductoComponent,
+    VerProductoComponent,
+    EditarProductoComponent,
+    GestionarUsuarioComponent,
+    VerUsuarioComponent,
+    EditarUsuarioComponent
   ],
   imports: [
     CommonModule,

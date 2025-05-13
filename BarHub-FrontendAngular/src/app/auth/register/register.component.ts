@@ -1,39 +1,31 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service'; // Servicio de autenticación
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-registro',
+  selector: 'app-register',
   templateUrl: './register.component.html',
 })
-export class RegistroComponent {
-  formulario: FormGroup;
+export class RegisterComponent {
+  form = {
+    username: '',
+    email: '',
+    password: '',
+    role: ['ROLE_CLIENTE']
+  };
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.formulario = this.fb.group({
-      nombre: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
+  constructor(private http: HttpClient) {}
 
-  registrar() {
-    if (this.formulario.valid) {
-      const user = this.formulario.value;
-      this.authService.registrar(user).subscribe({
-        next: (response) => {
-          console.log('Usuario registrado:', response);
-          this.router.navigate(['/login']);
+  onSubmit(): void {
+    this.http.post('http://localhost:8080/api/auth/signup', this.form)
+      .subscribe({
+        next: (res) => {
+          console.log('✅ Registro exitoso', res);
+          alert('Usuario registrado correctamente');
         },
         error: (err) => {
-          console.error('Error al registrar el usuario:', err);
-        },
+          console.error('❌ Error al registrarse', err);
+          alert('Error al registrarse');
+        }
       });
-    }
   }
 }

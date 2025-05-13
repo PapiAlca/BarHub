@@ -56,12 +56,8 @@ public class ProductoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            productoService.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).body("El producto con id " + id + " ha sido eliminado");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorDto.from("Producto no encontrado: " + e.getMessage()));
-        }
+    public ResponseEntity<Void> deleteMesa(@PathVariable Long id) {
+        productoService.delete(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
 }

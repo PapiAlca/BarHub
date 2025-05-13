@@ -55,13 +55,9 @@ public class MesaController {
         }
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            mesaService.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).body("La mesa con id " + id + " ha sido eliminada");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorDto.from("Mesa no encontrada: " + e.getMessage()));
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMesa(@PathVariable Long id) {
+        mesaService.delete(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
 }

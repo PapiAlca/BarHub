@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
+  constructor(private authService: AuthService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  get sesionIniciada(): boolean {
+    return this.authService.isAuthenticated();
   }
 
+  cerrarSesion() {
+    this.authService.logout();
+  }
 }

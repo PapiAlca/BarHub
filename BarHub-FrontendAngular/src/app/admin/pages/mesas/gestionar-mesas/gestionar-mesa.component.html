@@ -23,7 +23,7 @@
                     <th style="background-color: #bccdd9; color: #176029;" scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="mesas.length > 0; else sinMesas">
                 <tr *ngFor="let mesa of mesas">
                     <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{mesa.codigoqr}}</td>
                     <td style="color: rgb(84, 84, 84);">{{mesa.estado}}</td>
@@ -38,6 +38,11 @@
                     </td>
                 </tr>
             </tbody>
+            <ng-template #sinMesas>
+                <tr>
+                  <td colspan="3" class="text-center">No hay mesas registradas.</td>
+                </tr>
+            </ng-template>
         </table>
     </div>
 </body>

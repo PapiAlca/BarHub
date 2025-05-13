@@ -1,6 +1,8 @@
 package com.daw2.barhub.auth.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +12,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -30,4 +34,11 @@ public class Role {
   @UpdateTimestamp
   private Instant updatedAt;
 
- }
+  public String getNombre() {
+    return name.toString();
+  }
+
+  @ManyToMany(mappedBy = "roles")
+  @JsonBackReference
+  private Set<User> users = new HashSet<>();
+}

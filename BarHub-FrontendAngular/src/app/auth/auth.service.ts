@@ -1,21 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = `${environment.urlBackendSpring}/auth`;
+  private apiUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
 
-  registrar(user: { nombre: string; email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, user);
+  login(credentials: { username: string; password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials);
   }
 
-  iniciarSesion(user: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, user);
+  register(data: { username: string; email: string; password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, data);
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  verifyEmail(token: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/verify?token=${token}`);
   }
 }

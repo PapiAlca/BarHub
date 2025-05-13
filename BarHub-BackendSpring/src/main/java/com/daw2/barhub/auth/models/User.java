@@ -1,5 +1,6 @@
 package com.daw2.barhub.auth.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -30,6 +31,9 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(nullable = false)
+  private boolean enabled = false;
+
   public User (String username, String email, String password) {
     this.username = username;
     this.email = email;
@@ -52,11 +56,13 @@ public class User {
   @Column(length = 60)
   private String password;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(  name = "user_roles", 
-        joinColumns = @JoinColumn(name = "user_id"), 
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "user_roles",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @JsonManagedReference
   private Set<Role> roles = new HashSet<>();
+
   @CreationTimestamp
   private Instant createdAt;
   @UpdateTimestamp
