@@ -10,6 +10,11 @@ import { EditarMesaComponent } from './pages/mesas/editar-mesas/editar-mesas.com
 import { GestionarMesaComponent } from './pages/mesas/gestionar-mesas/gestionar-mesa.component';
 import { VerMesaComponent } from './pages/mesas/ver-mesa/ver-mesa.component';
 
+// Rutas Pedidos
+import { EditarPedidoComponent } from './pages/pedidos/editar-pedidos/editar-pedidos.component';
+import { GestionarPedidoComponent } from './pages/pedidos/gestionar-pedidos/gestionar-pedido.component';
+import { VerPedidoComponent } from './pages/pedidos/ver-pedido/ver-pedido.component';
+
 // Rutas Productos
 import { EditarProductoComponent } from './pages/productos/editar-productos/editar-productos.component';
 import { GestionarProductoComponent } from './pages/productos/gestionar-productos/gestionar-producto.component';
@@ -45,6 +50,24 @@ const routes: Routes = [
       {
         path: 'ver-mesa/:id',
         component: VerMesaComponent
+      },
+
+      // Pedidos
+      {
+        path: 'crear-pedido',
+        component: EditarPedidoComponent,
+      },
+      {
+        path: 'editar-pedido/:id',
+        component: EditarPedidoComponent
+      },
+      {
+        path: 'gestionar-pedidos',
+        component: GestionarPedidoComponent
+      },
+      {
+        path: 'ver-pedido/:id',
+        component: VerPedidoComponent
       },
 
       // Productos

@@ -27,8 +27,10 @@ public class SecurityConfig {
                         // Endpoints públicos
                         .requestMatchers(
                                 "/api/auth/**",
-                                "/productos/**",
-                                "/pedidos/**"
+                                "/mesas/**",
+                                "/pedidos/**",
+                                "/productos/**"
+                                
                         ).permitAll()
 
                         // Endpoints de administración
