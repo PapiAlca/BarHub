@@ -28,12 +28,13 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/productos/**",
-                                "/mesas/**"
+                                "/pedidos/**"
                         ).permitAll()
 
                         // Endpoints de administración
                         .requestMatchers(
                                 "/admin/mesas/**",
+                                "/admin/pedidos/**",
                                 "/admin/productos/**",
                                 "/admin/roles/**",
                                 "/admin/usuarios/**"
