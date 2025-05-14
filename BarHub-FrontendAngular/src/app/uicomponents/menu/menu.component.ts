@@ -6,7 +6,8 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './menu.component.html',
 })
 export class MenuComponent {
-  constructor(private authService: AuthService) {}
+  
+  constructor(public authService: AuthService) {}
 
   get sesionIniciada(): boolean {
     return this.authService.isAuthenticated();
@@ -14,5 +15,9 @@ export class MenuComponent {
 
   cerrarSesion() {
     this.authService.logout();
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.hasRole('ROLE_ADMIN');
   }
 }

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth';
+  private roles: string[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -28,5 +29,13 @@ export class AuthService {
 
   verifyEmail(token: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/verify?token=${token}`);
+  }
+
+  setRoles(roles: string[]) {
+    this.roles = roles;
+  }
+
+  hasRole(role: string): boolean {
+    return this.roles.includes(role);
   }
 }

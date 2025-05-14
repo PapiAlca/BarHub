@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -19,20 +21,35 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors().configurationSource(corsConfigurationSource())
-                .and()
-                .csrf().disable()
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        // Endpoints públicos
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/productos/**",
+                                "/mesas/**"
+                        ).permitAll()
+
+                        // Endpoints de administración
+                        .requestMatchers(
+                                "/admin/mesas/**",
+                                "/admin/productos/**",
+                                "/admin/roles/**",
+                                "/admin/usuarios/**"
+                        ).hasRole("ADMIN") // Sin ROLE_ (Spring Security lo añade automáticamente)
+
+                        // Permitir preflight para CORS
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/mesas/**").permitAll() //hasRole("ROLE_ADMIN")
-                        .requestMatchers("/productos/**").permitAll() //hasRole("ROLE_ADMIN")
-                        .requestMatchers("/roles/**").permitAll() //hasRole("ROLE_ADMIN")
-                        .requestMatchers("/usuarios/**").permitAll() //hasRole("ROLE_ADMIN")
+
+                        // Resto de endpoints requieren autenticación
                         .anyRequest().authenticated()
                 )
-                .httpBasic().disable()
-                .formLogin().disable();
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
 
         return http.build();
     }
@@ -40,14 +57,13 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200")); // Origen del frontend
+        config.setAllowedOriginPatterns(List.of("http://localhost:4200")); // Usar originPatterns
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config); // Aplicar configuración CORS a todos los endpoints
-
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
 }

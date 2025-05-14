@@ -17,8 +17,8 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       #ddl-auto: create
-      ddl-auto: update
-      #ddl-auto=create-drop
+      #ddl-auto: update
+      ddl-auto=create-drop
       #ddl-auto=none
 
     properties:

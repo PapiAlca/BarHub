@@ -34,7 +34,7 @@ public class UsuarioDto {
 
         dto.setRoles(
                 user.getRoles().stream()
-                        .map(role -> role.getName().name())
+                        .map(role -> role.getName() != null ? role.getName().name() : "SIN_ROL")
                         .collect(Collectors.toList())
         );
 

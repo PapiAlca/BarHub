@@ -57,11 +57,12 @@ public class User {
   @Column(length = 60)
   private String password;
 
-  @ManyToMany(fetch = FetchType.LAZY) // Cambiar a LAZY
-  @JoinTable(name = "user_roles",
+  @ManyToMany
+  @JoinTable(
+          name = "user_roles",
           joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "role_id"))
-  @JsonIgnore
+          inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
   private Set<Role> roles = new HashSet<>();
 
   @CreationTimestamp

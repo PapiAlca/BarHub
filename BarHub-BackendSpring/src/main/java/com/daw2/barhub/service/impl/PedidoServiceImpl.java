@@ -60,6 +60,7 @@ public class PedidoServiceImpl implements PedidoService {
             if (entity.getUser() != null && entity.getUser().getId() != null) {
                 User usuario = userRepository.findById(entity.getUser().getId())
                         .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                pedidoExistente.setUser(null);
                 //pedidoExistente.setUserId(getUserId());
 
                 //PedidoDto pedidoDto = new PedidoDto();

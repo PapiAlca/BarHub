@@ -36,7 +36,12 @@ public class PedidoDto {
         if (pedido != null) {
             dto = new PedidoDto();
             dto.setId(pedido.getId());
-            dto.setIdUser(pedido.getUser().getId());
+            if (pedido.getUser() != null) {
+                dto.setIdUser(pedido.getUser().getId());
+            } else {
+                dto.setIdUser(null);
+            }
+
             dto.setIdMesa(pedido.getMesa().getId());
             dto.setFecha(pedido.getFecha());
             dto.setEstado(pedido.getEstado());

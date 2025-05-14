@@ -35,7 +35,7 @@ public class Role {
   private Instant updatedAt;
 
   @ManyToMany(mappedBy = "roles")
-  @JsonIgnore
+  @JsonBackReference("user-role")
   private Set<User> users = new HashSet<>();
 
   public String getNombre() {
