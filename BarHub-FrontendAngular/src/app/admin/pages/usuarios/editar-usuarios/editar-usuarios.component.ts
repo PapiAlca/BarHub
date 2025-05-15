@@ -14,9 +14,9 @@ export class EditarUsuarioComponent implements OnInit {
   
   formulario: FormGroup = this.fb.group({
     id: [-1],
-    nombre: [''],
+    username: [''],
     email: [''],
-    habilitado: [true],
+    password: [''],
     roles: [[]]
   });
   editar: boolean = false;
@@ -40,6 +40,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   cargarRoles(): void {
     this.rolService.getRoles().subscribe(roles => {
+      console.log('Roles recibidos:', roles);
       this.rolesDisponibles = roles;
     });
   }
@@ -70,18 +71,16 @@ export class EditarUsuarioComponent implements OnInit {
       )
       .subscribe({
         next: (usuario: Usuario) => {
+          console.log('Usuario cargado:', usuario);
           this.formulario.reset({
             ...usuario,
-            roles: usuario.roles
-              ? usuario.roles.map(r => r.name ? r.name : r)
-              : [] // Si es undefined, asigna array vacío
+            roles: usuario.roles || []
           });
         },
         error: () => this.router.navigate(['/admin/gestionar-usuarios'])
       });
   }
   
-
   crearUsuario() {
     const nuevoUsuario: Usuario = {
       username: this.formulario.value.username,
@@ -132,4 +131,15 @@ export class EditarUsuarioComponent implements OnInit {
     const roles: Rol[] = this.formulario.value.roles || [];
     return roles.some(r => r.id === rol.id);
   }
+
+  formatearNombreRol(nombre: string): string {
+    return nombre.replace('ROLE_', '');
+  }  
+
+  getRolClass(nombre: string): string {
+    if (nombre.includes('ADMIN')) return 'rol-admin';
+    if (nombre.includes('CLIENTE')) return 'rol-cliente';
+    if (nombre.includes('EMPLEADO')) return 'rol-empleado';
+    return '';
+  }  
 }

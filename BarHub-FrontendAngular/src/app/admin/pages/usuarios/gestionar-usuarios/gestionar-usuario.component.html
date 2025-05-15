@@ -33,8 +33,8 @@
                     
                     <td>
                         <span *ngIf="usuario.roles && usuario.roles.length > 0; else sinRoles">
-                            <span *ngFor="let rol of usuario.roles">
-                                {{ rol.name }}
+                            <span *ngFor="let rol of usuario.roles; let i = index">
+                              {{ rol }}<span *ngIf="i < usuario.roles.length - 1">, </span>
                             </span>
                         </span>
                         <ng-template #sinRoles>

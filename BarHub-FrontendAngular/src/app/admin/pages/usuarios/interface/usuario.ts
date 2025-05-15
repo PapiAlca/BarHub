@@ -2,11 +2,11 @@ export interface Usuario {
     id?: number;
     username: string;
     email: string;
-    password?: string;
-    roles?: Rol[];
+    password: string;
+    roles: Rol[];
 }
   
 export interface Rol {
     id: number;
-    name: string;
+    nombre: string;
 }  

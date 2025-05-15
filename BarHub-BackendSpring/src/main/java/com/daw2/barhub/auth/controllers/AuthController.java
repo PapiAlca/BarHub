@@ -45,7 +45,6 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
-
   /*
   {"username": "us01", "password":"1234"}
    */

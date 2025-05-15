@@ -11,6 +11,25 @@
     #volver {
         background-color: #97b5c8;
     }
+    
+    .rol-admin {
+      background-color: #f28b82; /* rojo claro y cálido */
+      color: #000;
+      border-radius: 10px;
+    }
+
+    .rol-cliente {
+      background-color: #fdd663; /* amarillo suave, no chillón */
+      color: #000;
+      border-radius: 10px;
+    }
+
+    .rol-empleado {
+      background-color: #81c995; /* verde pastel bonito */
+      color: #000;
+      border-radius: 10px;
+    }
+    
 </style>
 
 <div class="row m-auto w-75 pt-5">
@@ -23,8 +42,8 @@
 
         <div class="row">
             <div class="col-md-12 mb-3">
-                <label for="nombre" class="form-label">Nombre:</label>
-                <input formControlName="nombre" type="text" class="form-control" id="nombre">
+                <label for="username" class="form-label">Nombre:</label>
+                <input formControlName="username" type="text" class="form-control" id="username">
             </div>
         </div>
 
@@ -52,9 +71,16 @@
                           class="form-check-input"
                           [checked]="isRoleChecked(rol)"
                           (change)="toggleRol(rol)"
+                          id="rol-{{rol.id}}"
                         >
-                        <label class="form-check-label">{{ rol.name }}</label>
-                    </div>
+                        <label 
+                          class="form-check-label px-2 py-1 rounded"
+                          [ngClass]="getRolClass(rol.nombre)"
+                          for="rol-{{rol.id}}"
+                        >
+                          {{ formatearNombreRol(rol.nombre) }}
+                        </label>
+                      </div>                      
                 </div>
                 <small class="text-muted">Selecciona uno o varios roles para este usuario.</small>
             </div>

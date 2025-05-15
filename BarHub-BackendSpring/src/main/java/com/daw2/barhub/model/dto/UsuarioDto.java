@@ -22,7 +22,6 @@ public class UsuarioDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private boolean habilitado;
     private List<String> roles;
 
     public static UsuarioDto from(User user) {
@@ -58,9 +57,5 @@ public class UsuarioDto {
 
     public @NotBlank @Size(max = 20) String getUsername() {
         return this.nombre;
-    }
-
-    public boolean isEnabled() {
-        return this.habilitado;
     }
 }

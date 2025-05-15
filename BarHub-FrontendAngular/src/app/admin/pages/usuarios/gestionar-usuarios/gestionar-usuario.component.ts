@@ -19,11 +19,13 @@ export class GestionarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarUsuarios();
+    
   }
 
   cargarUsuarios() {
     this.usuarioService.get().subscribe({
       next: (usuarios) => {
+        console.log('Usuarios cargados:', usuarios);
         this.usuarios = usuarios;
       },
       error: (err) => {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 @RestController
 @RequestMapping("/usuarios")
@@ -43,9 +43,7 @@ public class UsuarioController {
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody UsuarioDto usuarioDto) {
         try {
-            User usuario = usuarioDto.to();
-            usuario.setPassword(passwordEncoder.encode(usuarioDto.getPassword()));
-            User usuarioGuardado = userService.save(usuario);
+            User usuarioGuardado = userService.crearUsuario(usuarioDto);  // Delegar todo al servicio
             return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioDto.from(usuarioGuardado));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -53,7 +51,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<?> show(@PathVariable Long id) {
         try {
             User usuario = userService.findById(id);
@@ -67,7 +65,7 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody UsuarioDto usuarioDto) {
         try {
             User usuarioExistente = userService.findById(id);
@@ -89,7 +87,7 @@ public class UsuarioController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> deleteUsuario(@PathVariable Long id) {
         try {
             userService.delete(id);

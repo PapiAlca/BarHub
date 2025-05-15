@@ -30,7 +30,7 @@ export class UsuarioService {
 
   // Métodos existentes con corrección de URLs y manejo de errores
   get(): Observable<Usuario[]> {
-    return this.httpClient.get<Usuario[]>(this.URL_USUARIOS)
+    return this.httpClient.get<Usuario[]>(this.URL_USUARIOS + '/')
       .pipe(catchError(this.handleError));
   }
 

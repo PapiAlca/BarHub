@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RolService {
-  private ROLES_URL = `${environment.urlBackendSpring}/roles`;
+  private ROLES_URL = `${environment.urlBackendSpring}/roles/`;
 
   constructor(private http: HttpClient) {}
 
