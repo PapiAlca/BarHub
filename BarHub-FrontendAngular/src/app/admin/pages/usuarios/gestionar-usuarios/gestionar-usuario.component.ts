@@ -38,7 +38,7 @@ export class GestionarUsuarioComponent implements OnInit {
       '¿Está seguro de que desea eliminar el usuario?',
       'Eliminar usuario', 
       () => {
-        this.usuarioService.del(usuario).subscribe({
+        this.usuarioService.del(usuario.id!).subscribe({
           next: () => {
             this.dialogService.mostrarToast('Usuario eliminado correctamente');
             this.cargarUsuarios();
@@ -47,5 +47,5 @@ export class GestionarUsuarioComponent implements OnInit {
         });
       }
     );
-  }
+  }  
 }

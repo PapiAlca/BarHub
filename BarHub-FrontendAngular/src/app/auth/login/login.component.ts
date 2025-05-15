@@ -26,8 +26,8 @@ export class LoginComponent {
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe({
         next: (res) => {
-          localStorage.setItem('token', res.token);
-          this.router.navigate(['/dashboard']); // o donde quieras
+          this.authService.setToken(res.token);
+          this.router.navigate(['/dashboard']);
         },
         error: (err) => {
           alert('Login failed');
@@ -35,5 +35,5 @@ export class LoginComponent {
         }
       });
     }
-  }
+  }  
 }

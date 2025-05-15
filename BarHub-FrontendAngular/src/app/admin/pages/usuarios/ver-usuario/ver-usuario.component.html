@@ -18,24 +18,22 @@
                 <tr>
                     <th style="background-color: #bccdd9; color: #003d5a;" class="ps-4" scope="col">Nombre</th>
                     <th style="background-color: #bccdd9; color: #003d5a;" class="ps-4" scope="col">Email</th>
-                    <th style="background-color: #bccdd9; color: #003d5a;" class="ps-4" scope="col">Habilitado</th>
                     <th style="background-color: #bccdd9; color: #003d5a;" scope="col">Roles</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{ usuario.nombre }}</td>
+                    <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{ usuario.username }}</td>
                     <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{ usuario.email }}</td>
-                    <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">
-                        <span class="badge" [ngClass]="usuario.habilitado ? 'bg-success' : 'bg-danger'">
-                            {{ usuario.habilitado ? 'Activo' : 'Inactivo' }}
+                    <td>
+                        <span *ngIf="usuario.roles && usuario.roles.length > 0; else sinRoles">
+                            <span *ngFor="let rol of usuario.roles">
+                                {{ rol.name }}
+                            </span>
                         </span>
-                    </td>
-                    <td style="color: rgb(84, 84, 84);">
-                        <span *ngFor="let rol of usuario.roles" class="badge bg-secondary me-1">
-                            {{ rol.rol?.nombre || rol.rol_id }}
-                        </span>
-                        <span *ngIf="!usuario.roles || usuario.roles.length === 0" class="text-muted">Sin roles</span>
+                        <ng-template #sinRoles>
+                          <span class="text-muted">Sin Roles</span>
+                        </ng-template>
                     </td>
                 </tr>
             </tbody>

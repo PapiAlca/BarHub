@@ -22,33 +22,25 @@
                 <tr>
                     <th style="background-color: #bccdd9; color: #176029;" class="ps-4" scope="col">NOMBRE</th>
                     <th style="background-color: #bccdd9; color: #176029;" class="ps-4" scope="col">EMAIL</th>
-                    <th style="background-color: #bccdd9; color: #176029;" class="ps-4" scope="col">ESTADO</th>
                     <th style="background-color: #bccdd9; color: #176029;" class="ps-4" scope="col">ROLES</th>
                     <th style="background-color: #bccdd9; color: #176029;" scope="col"></th>
                 </tr>
             </thead>
             <tbody *ngIf="usuarios.length > 0; else sinUsuarios">
                 <tr *ngFor="let usuario of usuarios">
-                    <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{usuario.nombre}}</td>
+                    <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{usuario.username}}</td>
                     <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{usuario.email}}</td>
-
-                    <td class="ps-4 align-middle">
-                        <span class="badge" 
-                            [ngClass]="usuario.habilitado ? 'bg-success' : 'bg-danger'">
-                            {{ usuario.habilitado ? 'Activo' : 'Inactivo' }}
-                        </span>
-                    </td>
                     
                     <td>
                         <span *ngIf="usuario.roles && usuario.roles.length > 0; else sinRoles">
-                          <span *ngFor="let rol of usuario.roles" class="badge bg-secondary me-1">
-                            {{ rol }}
-                          </span>
+                            <span *ngFor="let rol of usuario.roles">
+                                {{ rol.name }}
+                            </span>
                         </span>
                         <ng-template #sinRoles>
-                          <span class="text-muted">-</span>
+                          <span class="text-muted">Sin Roles</span>
                         </ng-template>
-                      </td>
+                    </td>
                     
                     <td class="border-start text-center" id="acciones">
                         <i [routerLink]="['/admin/ver-usuario', usuario.id]" 

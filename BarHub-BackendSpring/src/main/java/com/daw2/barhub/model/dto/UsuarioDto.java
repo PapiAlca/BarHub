@@ -30,7 +30,6 @@ public class UsuarioDto {
         dto.setId(user.getId());
         dto.setNombre(user.getUsername());
         dto.setEmail(user.getEmail());
-        dto.setHabilitado(user.isEnabled());
 
         dto.setRoles(
                 user.getRoles().stream()
@@ -53,7 +52,6 @@ public class UsuarioDto {
         user.setUsername(this.nombre);
         user.setEmail(this.email);
         user.setPassword(this.password);
-        user.setEnabled(this.habilitado);
 
         return user;
     }

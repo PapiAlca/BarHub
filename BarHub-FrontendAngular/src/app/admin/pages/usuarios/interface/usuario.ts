@@ -1,21 +1,12 @@
 export interface Usuario {
     id?: number;
-    nombre: string;
+    username: string;
     email: string;
-    password: string;
-    habilitado: boolean;
-    roles: RolUsuario[];
-    created_at?: string;
-    updated_at?: string;
+    password?: string;
+    roles?: Rol[];
 }
-
+  
 export interface Rol {
-    id?: number;
-    nombre: string;
-}
-
-export interface RolUsuario {
-    rol_id: number;
-    usuario_id: number;
-    rol?: Rol;
-}
+    id: number;
+    name: string;
+}  

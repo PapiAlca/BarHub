@@ -8,11 +8,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RolService {
-  private URL_ROLES = `${environment.urlBackendSpring}/roles/`;
+  private ROLES_URL = `${environment.urlBackendSpring}/roles`;
 
   constructor(private http: HttpClient) {}
 
   getRoles(): Observable<Rol[]> {
-    return this.http.get<Rol[]>(this.URL_ROLES);
+    return this.http.get<Rol[]>(this.ROLES_URL);
   }
 }

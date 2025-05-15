@@ -38,12 +38,22 @@ export class EditarUsuarioComponent implements OnInit {
     }
   }
 
-  cargarRoles() {
-    this.rolService.getRoles().subscribe({
-      next: (roles) => this.rolesDisponibles = roles,
-      error: (err) => console.error('Error cargando roles:', err)
+  cargarRoles(): void {
+    this.rolService.getRoles().subscribe(roles => {
+      this.rolesDisponibles = roles;
     });
-  }  
+  }
+
+  actualizarRolesUsuario(rolesSeleccionados: Rol[]): void {
+    const userId = this.formulario.get('id')?.value;
+    if (!userId) return;
+  
+    this.usuarioService.actualizarRoles(userId, rolesSeleccionados)
+      .subscribe(rolesActualizados => {
+        this.formulario.get('roles')?.setValue(rolesActualizados);
+      });
+  }
+  
 
   guardar() {
     if (this.formulario.get('id')?.value > 0) {
@@ -62,21 +72,21 @@ export class EditarUsuarioComponent implements OnInit {
         next: (usuario: Usuario) => {
           this.formulario.reset({
             ...usuario,
-            roles: usuario.roles.map(r => r.rol || r)
+            roles: usuario.roles
+              ? usuario.roles.map(r => r.name ? r.name : r)
+              : [] // Si es undefined, asigna array vacío
           });
         },
-        error: () => {
-          this.router.navigate(['/admin/gestionar-usuarios']);
-        }
+        error: () => this.router.navigate(['/admin/gestionar-usuarios'])
       });
   }
+  
 
   crearUsuario() {
     const nuevoUsuario: Usuario = {
-      nombre: this.formulario.value.nombre,
+      username: this.formulario.value.username,
       email: this.formulario.value.email,
       password: this.formulario.value.password,
-      habilitado: this.formulario.value.habilitado,
       roles: this.formulario.value.roles,
     };
 
@@ -102,20 +112,18 @@ export class EditarUsuarioComponent implements OnInit {
     });
   }
 
-  onRoleChange(event: any, rol: Rol) {
+  toggleRol(rol: Rol): void {
     const roles: Rol[] = this.formulario.value.roles ? [...this.formulario.value.roles] : [];
-    if (event.target.checked) {
-      // Añadir rol si está seleccionado y no existe ya
-      if (!roles.some(r => r.id === rol.id)) {
-        roles.push(rol);
-      }
+    
+    if (roles.some(r => r.id === rol.id)) {
+      // Remover rol si ya existe
+      const index = roles.findIndex(r => r.id === rol.id);
+      roles.splice(index, 1);
     } else {
-      // Eliminar rol si está desmarcado
-      const idx = roles.findIndex(r => r.id === rol.id);
-      if (idx !== -1) {
-        roles.splice(idx, 1);
-      }
+      // Agregar rol si no existe
+      roles.push(rol);
     }
+    
     this.formulario.get('roles')?.setValue(roles);
     this.formulario.get('roles')?.markAsDirty();
   }

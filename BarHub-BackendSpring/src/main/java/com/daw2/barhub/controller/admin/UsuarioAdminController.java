@@ -80,7 +80,6 @@ public class UsuarioAdminController {
             if (usuarioDto.getPassword() != null) {
                 usuarioExistente.setPassword(passwordEncoder.encode(usuarioDto.getPassword()));
             }
-            usuarioExistente.setEnabled(usuarioDto.isEnabled());
 
             User usuarioActualizado = userService.save(usuarioExistente);
             return ResponseEntity.ok(UsuarioDto.from(usuarioActualizado));

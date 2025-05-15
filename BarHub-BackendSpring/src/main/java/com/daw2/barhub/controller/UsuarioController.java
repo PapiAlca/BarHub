@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 @Slf4j
 @RestController
 @RequestMapping("/usuarios")
@@ -80,7 +80,6 @@ public class UsuarioController {
             if (usuarioDto.getPassword() != null) {
                 usuarioExistente.setPassword(passwordEncoder.encode(usuarioDto.getPassword()));
             }
-            usuarioExistente.setEnabled(usuarioDto.isEnabled());
 
             User usuarioActualizado = userService.save(usuarioExistente);
             return ResponseEntity.ok(UsuarioDto.from(usuarioActualizado));

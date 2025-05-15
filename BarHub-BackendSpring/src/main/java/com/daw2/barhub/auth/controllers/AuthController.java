@@ -5,15 +5,12 @@ import com.daw2.barhub.auth.jwt.JwtUtils;
 import com.daw2.barhub.auth.models.Role;
 import com.daw2.barhub.auth.models.RoleEnum;
 import com.daw2.barhub.auth.models.User;
-import com.daw2.barhub.auth.models.VerificationToken;
 import com.daw2.barhub.auth.payload.request.LoginRequest;
 import com.daw2.barhub.auth.payload.request.SignupRequest;
 import com.daw2.barhub.auth.payload.response.JwtResponse;
 import com.daw2.barhub.auth.payload.response.MessageResponse;
 import com.daw2.barhub.auth.repository.RoleRepository;
 import com.daw2.barhub.auth.repository.UserRepository;
-import com.daw2.barhub.auth.repository.VerificationTokenRepository;
-import com.daw2.barhub.auth.services.EmailService;
 import com.daw2.barhub.auth.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +22,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -42,12 +38,6 @@ public class AuthController {
 
   @Autowired
   RoleRepository roleRepository;
-
-  @Autowired
-  VerificationTokenRepository verificationTokenRepository;
-
-  @Autowired
-  EmailService emailService;
 
   @Autowired
   PasswordEncoder encoder;
@@ -102,9 +92,6 @@ public class AuthController {
             encoder.encode(signUpRequest.getPassword())
     );
 
-    // Marcar usuario como NO VERIFICADO
-    user.setEnabled(false);
-
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
 
@@ -137,38 +124,6 @@ public class AuthController {
 
     userRepository.save(user);
 
-    // Generar y guardar token de verificación
-    String token = UUID.randomUUID().toString();
-    VerificationToken verificationToken = new VerificationToken(token, user);
-    verificationTokenRepository.save(verificationToken);
-
-    // Enviar el email
-    emailService.sendVerificationEmail(user.getEmail(), token);
-
-    return ResponseEntity.ok(new MessageResponse("Usuario registrado correctamente. Por favor, verifica tu email."));
-  }
-
-  @GetMapping("/verify")
-  public ResponseEntity<?> verifyUser(@RequestParam("token") String token) {
-    Optional<VerificationToken> optionalToken = verificationTokenRepository.findByToken(token);
-
-    if (optionalToken.isEmpty()) {
-      return ResponseEntity.badRequest().body("Token inválido");
-    }
-
-    VerificationToken verificationToken = optionalToken.get();
-
-    // Verificar si expiró
-    if (verificationToken.getExpiryDate().isBefore(Instant.now())) {
-      return ResponseEntity.badRequest().body("Token expirado");
-    }
-
-    User user = verificationToken.getUser();
-    user.setEnabled(true);
-    userRepository.save(user);
-
-    verificationTokenRepository.delete(verificationToken);
-
-    return ResponseEntity.ok("Usuario verificado correctamente");
+    return ResponseEntity.ok(new MessageResponse("Usuario registrado correctamente."));
   }
 }
