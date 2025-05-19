@@ -7,20 +7,24 @@ import { UicomponentsModule } from './uicomponents/uicomponents.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/token.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CartaComponent } from './public/carta/carta.component';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CartaComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     UicomponentsModule,
-    CommonModule,
     ReactiveFormsModule
+  ],  
+  exports: [
+    CartaComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

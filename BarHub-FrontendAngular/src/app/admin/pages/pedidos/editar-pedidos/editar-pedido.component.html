@@ -20,7 +20,6 @@
           <label class="form-label">Estado</label>
           <select formControlName="estado" class="form-select">
             <option value="pendiente">Pendiente</option>
-            <option value="en_proceso">En proceso</option>
             <option value="completado">Completado</option>
             <option value="cancelado">Cancelado</option>
           </select>
@@ -35,7 +34,7 @@
         </div>
         <div class="col-md-6 mb-3">
           <label class="form-label">Usuario</label>
-          <select formControlName="userId" class="form-select">
+          <select formControlName="id_user" class="form-select">
             <option *ngFor="let user of users" [ngValue]="user.id">
               {{ user.nombre }} (ID: {{ user.id }})
             </option>
@@ -43,7 +42,7 @@
         </div>
         <div class="col-md-6 mb-3">
           <label class="form-label">Mesa</label>
-          <select formControlName="mesaId" class="form-select">
+          <select formControlName="id_mesa" class="form-select">
             <option *ngFor="let mesa of mesas" [ngValue]="mesa.id">
               Mesa {{ mesa.id }} - {{ mesa.codigoqr }}
             </option>

@@ -41,9 +41,8 @@ export class EditarPedidoComponent implements OnInit {
   ) {
     // Inicializa el formulario en el constructor
     this.formulario = this.fb.group({
-      id: [-1],
-      userId: [null],
-      mesaId: [null],
+      id_user: [null],
+      id_mesa: [null],
       estado: ['pendiente'],
       fecha: [new Date().toISOString().split('T')[0]],
       total: [0]
@@ -71,6 +70,7 @@ export class EditarPedidoComponent implements OnInit {
 
   crearPedido() {
     const nuevoPedido: Pedido = this.formulario.value;
+    console.log("Pedido a enviar:", nuevoPedido);
     this.pedidoService.post(nuevoPedido).subscribe(
       response => {
         this.router.navigate(['/admin/gestionar-pedidos']);

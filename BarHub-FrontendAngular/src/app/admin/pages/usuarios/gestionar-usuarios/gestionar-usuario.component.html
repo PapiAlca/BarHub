@@ -1,5 +1,4 @@
 <body>
-    <!-- Eliminar *ngIf del body para evitar posibles errores de renderizado -->
     <div class="ps-5 pe-5 pb-0 pt-3">
         <div class="d-flex justify-content-between align-items-center mt-3 mb-0 me-3 ms-3">
             <div>
@@ -34,7 +33,7 @@
                     <td>
                         <span *ngIf="usuario.roles && usuario.roles.length > 0; else sinRoles">
                             <span *ngFor="let rol of usuario.roles; let i = index">
-                              {{ rol }}<span *ngIf="i < usuario.roles.length - 1">, </span>
+                                {{ rol.nombre }}<span *ngIf="i < usuario.roles.length - 1">, </span>
                             </span>
                         </span>
                         <ng-template #sinRoles>

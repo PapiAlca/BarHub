@@ -30,11 +30,15 @@ export class GestionarPedidoComponent implements OnInit {
   }
 
   cargarPedidos() {
-    this.pedidoService.get().subscribe(pedidos => {
-      console.log('Pedidos cargadas:', pedidos);
-      this.pedidos = pedidos;
+    this.pedidoService.get().subscribe(data => {
+      this.pedidos = data.map(pedido => ({
+        ...pedido,
+        usuario: this.users.find(u => u.id === pedido.id_user),
+        mesa: this.mesas.find(m => m.id === pedido.id_mesa)
+      }));
+      console.log("Pedidos cargados:", this.pedidos);
     });
-  }
+  }  
 
   borrarPedido(pedido: Pedido) {
     this.dialogService.solicitarConfirmacion('¿Está seguro de que desea eliminar el pedido?',
@@ -48,15 +52,17 @@ export class GestionarPedidoComponent implements OnInit {
     });
   }
 
-  getUserName(userId: number | null | undefined): string {
-    if (userId === null || userId === undefined) return 'Usuario no encontrado';
-    const user = this.users.find(u => u.id === userId);
-    return user ? user.nombre : userId.toString();
+  getUserName(id_user: number | null | undefined): string {
+    if (id_user === null || id_user === undefined) return 'Usuario no encontrado';
+    const user = this.users.find(u => u.id === id_user);
+    console.log(id_user);
+    return user ? user.nombre : id_user.toString();
   }
   
-  getMesaCodigo(mesaId: number | null | undefined): string {
-    if (mesaId === null || mesaId === undefined) return 'Mesa no encontrada';
-    const mesa = this.mesas.find(m => m.id === mesaId);
-    return mesa ? mesa.codigoqr : mesaId.toString();
+  getMesaCodigo(id_mesa: number | null | undefined): string {
+    if (id_mesa === null || id_mesa === undefined) return 'Mesa no encontrada';
+    const mesa = this.mesas.find(m => m.id === id_mesa);
+    console.log(id_mesa);
+    return mesa ? mesa.codigoqr : id_mesa.toString();
   }
 }

@@ -32,6 +32,7 @@ public class PedidoController {
             pedidoService.save(pedido);
             return ResponseEntity.ok(PedidoDto.from(pedido));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorDto.from("Pedido no guardado " + e.getMessage()));
         }
     }
@@ -65,6 +66,7 @@ public class PedidoController {
             pedidoService.delete(id);
             return ResponseEntity.status(HttpStatus.OK).body("El pedido con id " + id + " ha sido eliminado");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorDto.from("Pedido no encontrado " + e.getMessage()));
         }
     }

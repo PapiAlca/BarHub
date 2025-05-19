@@ -5,6 +5,7 @@ import { switchMap } from "rxjs";
 import { RolService } from "../services/rol";
 import { UsuarioService } from "../services/usuario";
 import { Usuario, Rol } from "../interface/usuario";
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -89,6 +90,8 @@ export class EditarUsuarioComponent implements OnInit {
       roles: this.formulario.value.roles,
     };
 
+    console.log("Nuevo usuario: " + JSON.stringify(nuevoUsuario));
+
     this.usuarioService.post(nuevoUsuario).subscribe(
       response => {
         this.router.navigate(['/admin/gestionar-usuarios']);
@@ -115,11 +118,9 @@ export class EditarUsuarioComponent implements OnInit {
     const roles: Rol[] = this.formulario.value.roles ? [...this.formulario.value.roles] : [];
     
     if (roles.some(r => r.id === rol.id)) {
-      // Remover rol si ya existe
       const index = roles.findIndex(r => r.id === rol.id);
       roles.splice(index, 1);
     } else {
-      // Agregar rol si no existe
       roles.push(rol);
     }
     

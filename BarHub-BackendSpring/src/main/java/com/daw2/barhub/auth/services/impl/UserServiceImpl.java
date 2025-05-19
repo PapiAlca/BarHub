@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
         // Convertir lista de strings en roles persistidos
         if (usuarioDto.getRoles() != null && !usuarioDto.getRoles().isEmpty()) {
             Set<Role> roles = usuarioDto.getRoles().stream()
-                    .map(roleName -> roleRepository.findByName(RoleEnum.valueOf(roleName))
+                    .map(roleName -> roleRepository.findByName(RoleEnum.valueOf(roleName.getNombre()))
                             .orElseThrow(() -> new RuntimeException("Rol no encontrado: " + roleName)))
                     .collect(Collectors.toSet());
             user.setRoles(roles);

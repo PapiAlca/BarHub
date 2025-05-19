@@ -1,0 +1,19 @@
+<h2>CARTA</h2>
+<div class="productos">
+  <div class="producto" *ngFor="let producto of productos">
+    <div class="img-box">
+      <img [src]="producto.imagen" class="img-producto" alt="{{producto.nombre}}">
+    </div>
+    <div class="info-box">
+      <h4 class="nombre">{{ producto.nombre }}</h4>
+      <div class="desc">{{ producto.descripcion }}</div>
+      <div class="precio">{{ producto.precio | currency:'EUR' }}</div>
+      <div class="acciones">
+        <button class="add-btn" (click)="onAdd(producto)">
+          <span class="material-icons">+</span>
+        </button>
+        <span class="cantidad-label">Cantidad</span>
+      </div>
+    </div>
+  </div>
+</div>

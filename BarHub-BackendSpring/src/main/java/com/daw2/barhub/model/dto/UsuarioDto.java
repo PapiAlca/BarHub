@@ -16,25 +16,21 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UsuarioDto {
     private Long id;
-    private String nombre;
+    private String username;
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private List<String> roles;
+    private List<RoleDto> roles;
 
     public static UsuarioDto from(User user) {
         UsuarioDto dto = new UsuarioDto();
         dto.setId(user.getId());
-        dto.setNombre(user.getUsername());
+        dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
 
-        dto.setRoles(
-                user.getRoles().stream()
-                        .map(role -> role.getName() != null ? role.getName().name() : "SIN_ROL")
-                        .collect(Collectors.toList())
-        );
+        dto.setRoles(user.getRoles().stream().map(RoleDto::from).collect(Collectors.toList()));
 
         return dto;
     }
@@ -48,7 +44,7 @@ public class UsuarioDto {
     public User to() {
         User user = new User();
         user.setId(this.id);
-        user.setUsername(this.nombre);
+        user.setUsername(this.username);
         user.setEmail(this.email);
         user.setPassword(this.password);
 
@@ -56,6 +52,6 @@ public class UsuarioDto {
     }
 
     public @NotBlank @Size(max = 20) String getUsername() {
-        return this.nombre;
+        return this.username;
     }
 }

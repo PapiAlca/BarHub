@@ -7,6 +7,9 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { UicomponentsModule } from '../uicomponents/uicomponents.module';
 
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
+import { GestionarDetalleComponent } from './pages/detalles_pedidos/gestionar-detalles/gestionar-detalle.component';
+import { VerDetalleComponent } from './pages/detalles_pedidos/ver-detalle/ver-detalle.component';
+import { EditarDetalleComponent } from './pages/detalles_pedidos/editar-detalles/editar-detalles.component';
 import { GestionarMesaComponent } from './pages/mesas/gestionar-mesas/gestionar-mesa.component';
 import { VerMesaComponent } from './pages/mesas/ver-mesa/ver-mesa.component';
 import { EditarMesaComponent } from './pages/mesas/editar-mesas/editar-mesas.component';
@@ -23,6 +26,9 @@ import { EditarUsuarioComponent } from './pages/usuarios/editar-usuarios/editar-
 @NgModule({
   declarations: [
     BienvenidaComponent,
+    GestionarDetalleComponent,
+    VerDetalleComponent,
+    EditarDetalleComponent,
     GestionarMesaComponent,
     VerMesaComponent,
     EditarMesaComponent,

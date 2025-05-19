@@ -6,6 +6,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 
 // Rutas Mesas
+import { GestionarDetalleComponent } from './pages/detalles_pedidos/gestionar-detalles/gestionar-detalle.component';
+import { EditarDetalleComponent } from './pages/detalles_pedidos/editar-detalles/editar-detalles.component';
+import { VerDetalleComponent } from './pages/detalles_pedidos/ver-detalle/ver-detalle.component';
+
+// Rutas Mesas
 import { EditarMesaComponent } from './pages/mesas/editar-mesas/editar-mesas.component';
 import { GestionarMesaComponent } from './pages/mesas/gestionar-mesas/gestionar-mesa.component';
 import { VerMesaComponent } from './pages/mesas/ver-mesa/ver-mesa.component';
@@ -32,6 +37,24 @@ const routes: Routes = [
       {
         path: '',
         component: BienvenidaComponent
+      },
+
+      // Detalles de los pedidos
+      {
+        path: 'crear-detalle',
+        component: EditarDetalleComponent,
+      },
+      {
+        path: 'editar-detalle/:id',
+        component: EditarDetalleComponent
+      },
+      {
+        path: 'gestionar-detalles',
+        component: GestionarDetalleComponent
+      },
+      {
+        path: 'ver-detalle/:id',
+        component: VerDetalleComponent
       },
 
       // Mesas

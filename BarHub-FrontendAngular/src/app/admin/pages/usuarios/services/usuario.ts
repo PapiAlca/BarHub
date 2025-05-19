@@ -35,7 +35,7 @@ export class UsuarioService {
   }
 
   post(usuario: Usuario): Observable<Usuario> {
-    return this.httpClient.post<Usuario>(this.URL_USUARIOS, usuario)
+    return this.httpClient.post<Usuario>(this.URL_USUARIOS + "/", usuario)
       .pipe(catchError(this.handleError));
   }
 

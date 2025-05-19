@@ -28,8 +28,8 @@
           </thead>
           <tbody *ngIf="pedidos.length > 0; else sinPedidos">
             <tr *ngFor="let pedido of pedidos">
-                <td>{{ getUserName(pedido.userId) }}</td>
-                <td>{{ getMesaCodigo(pedido.mesaId) }}</td>
+                <td>{{ pedido.usuario?.username || 'Usuario no encontrado' }}</td>
+                <td>{{ pedido.mesa?.codigoqr || 'Mesa no encontrada' }}</td>
                 <td>{{ pedido.estado }}</td>
                 <td>{{ pedido.fecha }}</td>
                 <td>{{ pedido.total }}</td>
@@ -37,7 +37,7 @@
                 <td class="border-start text-center" id="acciones">
                     <i [routerLink]="['/admin/ver-pedido', pedido.id]" class="bi bi-eye me-2" 
                         style="color: #176029; cursor: pointer;"></i>
-                    <i [routerLink]="['/admin/editar-pedidos', pedido.id]" class="bi bi-pencil-square me-2"
+                    <i [routerLink]="['/admin/editar-pedido', pedido.id]" class="bi bi-pencil-square me-2"
                         style="color: #176029; cursor: pointer;"></i> 
                     <i (click)="borrarPedido(pedido)" class="bi bi-trash3-fill"
                         style="color: #176029; cursor: pointer;"></i>
