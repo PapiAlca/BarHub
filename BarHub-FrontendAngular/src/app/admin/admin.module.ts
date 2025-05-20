@@ -22,6 +22,9 @@ import { EditarProductoComponent } from './pages/productos/editar-productos/edit
 import { GestionarUsuarioComponent } from './pages/usuarios/gestionar-usuarios/gestionar-usuario.component';
 import { VerUsuarioComponent } from './pages/usuarios/ver-usuario/ver-usuario.component';
 import { EditarUsuarioComponent } from './pages/usuarios/editar-usuarios/editar-usuarios.component';
+import { GestionarSesionComponent } from './pages/sesiones_qr/gestionar-sesiones/gestionar-sesion.component';
+import { VerSesionComponent } from './pages/sesiones_qr/ver-sesion/ver-sesion.component';
+import { EditarSesionComponent } from './pages/sesiones_qr/editar-sesiones/editar-sesiones.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { EditarUsuarioComponent } from './pages/usuarios/editar-usuarios/editar-
     EditarProductoComponent,
     GestionarUsuarioComponent,
     VerUsuarioComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
+    GestionarSesionComponent,
+    VerSesionComponent,
+    EditarSesionComponent
   ],
   imports: [
     CommonModule,
