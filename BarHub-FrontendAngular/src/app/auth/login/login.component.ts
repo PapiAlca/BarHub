@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   form: FormGroup;
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -22,18 +23,20 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void {
-    if (this.form.valid) {
-      this.authService.login(this.form.value).subscribe({
-        next: (res) => {
-          this.authService.setToken(res.token);
-          this.router.navigate(['/dashboard']);
-        },
-        error: (err) => {
-          alert('Login failed');
-          console.error(err);
-        }
-      });
-    }
-  }  
+  onSubmit() {
+    if (this.form.invalid) return;
+
+    const credentials = {
+      username: this.form.value.username,
+      password: this.form.value.password
+    };
+
+    this.authService.login(credentials).subscribe({
+      next: () => this.router.navigate(['/carta']),
+      error: (err) => {
+        console.error('Error de login:', err);
+        this.errorMessage = 'Credenciales inválidas o error del servidor';
+      }
+    });
+  }
 }

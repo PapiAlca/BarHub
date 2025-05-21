@@ -8,19 +8,23 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/token.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CartaComponent } from './public/carta/carta.component';
+import { ConfirmarPedidoComponent } from './public/confirmar-pedido/confirmar-pedido.component';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CartaComponent
+    CartaComponent,
+    ConfirmarPedidoComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     UicomponentsModule,
+    FormsModule,
     ReactiveFormsModule
   ],  
   exports: [

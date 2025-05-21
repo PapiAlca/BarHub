@@ -1,122 +1,225 @@
-h2 {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 2.2rem;
-    margin: 2rem 0 1.5rem 2rem;
-    color: #0a2342;
-    letter-spacing: 1px;
+:host {
+  display: block;
+  max-width: 3000px;
+  margin: 0 110px;
+  padding: 0 30px;
+}
+
+.titulo-carta {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .productos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2.2rem;
-    padding: 0 2rem 2rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 20px 0;
 }
 
 .producto {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 6px 32px rgba(10,35,66,0.10);
-    padding: 1.3rem 1.2rem;
-    min-height: 170px;
-    border: 1px solid #f1f2f6;
-    transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 300px;
+  background: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .producto:hover {
-    box-shadow: 0 14px 36px rgba(10,35,66,0.18);
-    transform: translateY(-5px) scale(1.02);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
 }
 
 .img-box {
-    flex: 0 0 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 110px;
-    margin-right: 1.2rem;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: #f8f9fa;
 }
 
 .img-producto {
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 10px;
-    background: #f6f8fa;
-    box-shadow: 0 1px 6px rgba(10,35,66,0.06);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.img-producto:hover {
+  transform: scale(1.05);
 }
 
 .info-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 0;
+  padding: 20px;
 }
 
 .nombre {
-    font-size: 1.22rem;
-    font-weight: 600;
-    color: #0a2342;
-    margin: 0 0 0.15rem 0;
-    line-height: 1.1;
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  color: #34495e;
+  font-weight: 600;
 }
 
 .desc {
-    color: #555;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    margin-top: 0;
-    min-height: 22px;
+  color: #7f8c8d;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  height: 60px;
+  overflow: hidden;
+  font-size: 0.9rem;
 }
 
 .precio {
-    font-size: 1.08rem;
-    font-weight: bold;
-    color: #1abc9c;
-    margin-bottom: 0.7rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #27ae60;
+  margin-bottom: 20px;
 }
 
 .acciones {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.add-btn {
-    background: #fff;
-    color: #1abc9c;
-    border: 2px solid #1abc9c;
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    cursor: pointer;
-    transition: background 0.18s, color 0.18s, border 0.18s;
-    box-shadow: 0 2px 8px rgba(26,188,156,0.08);
-    outline: none;
+.add-btn, .remove-btn {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 22px;
 }
 
-.add-btn:hover, .add-btn:focus {
-    background: #1abc9c;
-    color: #fff;
-    border-color: #159d81;
+.add-btn:hover {
+  background-color: #27ae60;
 }
 
-.material-icons {
-    font-size: 1.6rem;
+.remove-btn {
+  background-color: #e74c3c;
 }
 
-.cantidad-label {
-    font-size: 0.95rem;
-    color: #888;
-    margin-left: 0.2rem;
+.remove-btn:hover {
+  background-color: #c0392b;
+}
+
+.cantidad {
+  margin: 0 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.mesa-input {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.mesa-input label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #34495e;
+  font-size: 1.1rem;
+}
+
+.select-mesa {
+  appearance: none;
+  padding: 12px 40px 12px 20px;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: white;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237f8c8d'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 18px;
+  width: 250px;
+  transition: border-color 0.2s ease;
+}
+
+select option {
+  color: #2c3e50;
+  background: #fff;
+}
+
+.select-mesa:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+}
+
+.carrito-resumen {
+  margin: 50px auto;
+  border: 2px solid #ecf0f1;
+  border-radius: 12px;
+  padding: 30px;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  max-width: 600px;
+}
+
+.carrito-resumen h3 {
+  margin: 0 0 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ecf0f1;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.carrito-resumen ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 25px;
+}
+
+.carrito-resumen li {
+  padding: 12px 0;
+  border-bottom: 1px solid #ecf0f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  font-weight: 700;
+  text-align: right;
+  margin: 25px 0;
+}
+
+.confirmar-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.confirmar-btn:not(:disabled):hover {
+  background-color: #2980b9;
+}
+
+.confirmar-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+  opacity: 0.8;
 }

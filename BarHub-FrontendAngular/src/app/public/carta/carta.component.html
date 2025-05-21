@@ -1,4 +1,14 @@
-<h2>CARTA</h2>
+<h2 class="titulo-carta">CARTA BARHUB</h2>
+
+<div class="mesa-input">
+  <select id="idMesa" [(ngModel)]="idMesa" class="select-mesa">
+    <option [ngValue]="null" disabled>Seleccione una mesa</option>
+    <option *ngFor="let mesa of mesas" [ngValue]="mesa.id">
+      {{ mesa.id }}
+    </option>
+  </select>  
+</div>
+
 <div class="productos">
   <div class="producto" *ngFor="let producto of productos">
     <div class="img-box">
@@ -9,11 +19,29 @@
       <div class="desc">{{ producto.descripcion }}</div>
       <div class="precio">{{ producto.precio | currency:'EUR' }}</div>
       <div class="acciones">
+        <button class="remove-btn" *ngIf="getCantidad(producto) > 0" (click)="onRemove(producto)">
+          <span class="material-icons">-</span>
+        </button>
+        <span class="cantidad" *ngIf="getCantidad(producto) > 0">{{ getCantidad(producto) }}</span>
         <button class="add-btn" (click)="onAdd(producto)">
           <span class="material-icons">+</span>
         </button>
-        <span class="cantidad-label">Cantidad</span>
       </div>
     </div>
   </div>
+</div>
+
+<div class="carrito-resumen" *ngIf="hayProductosSeleccionados()">
+  <h3>Resumen del pedido</h3>
+  <ul>
+    <li *ngFor="let item of productosSeleccionados">
+      {{ item.producto.nombre }} x {{ item.cantidad }} = {{ item.producto.precio * item.cantidad | currency:'EUR' }}
+    </li>
+  </ul>
+  <div class="total">
+    Total a pagar: {{ calcularTotal() | currency:'EUR' }}
+  </div>
+  <button class="confirmar-btn" (click)="confirmarPedido()" [disabled]="!idMesa">
+    Confirmar Pedido
+  </button>
 </div>

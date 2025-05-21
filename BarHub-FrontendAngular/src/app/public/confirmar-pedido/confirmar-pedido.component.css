@@ -1,0 +1,108 @@
+.confirmar-pedido {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+  
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.info-mesa {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+}
+
+.detalles-pedido table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.detalles-pedido th, 
+.detalles-pedido td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.detalles-pedido th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.total-label {
+  text-align: right;
+  font-weight: bold;
+}
+
+.total-valor {
+  font-weight: bold;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancelar-btn, .finalizar-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cancelar-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.finalizar-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.metodo-pago-section {
+  margin: 30px 0 20px 0;
+}
+
+.metodo-pago-label {
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+.metodo-pago-radios label {
+  margin-right: 24px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tarjeta-form {
+  margin: 20px 0 0 0;
+  padding: 18px 24px;
+  background: #f7f9fa;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  max-width: 400px;
+}
+
+.tarjeta-form label {
+  display: block;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.tarjeta-form input {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #bfc9d1;
+  border-radius: 5px;
+  margin-top: 4px;
+  font-size: 1rem;
+}
+  
