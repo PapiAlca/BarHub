@@ -1,5 +1,7 @@
 package com.daw2.barhub.auth.models;
 
+import com.daw2.barhub.model.entity.Pedido;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,7 +14,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -61,4 +65,8 @@ public class User {
   private Instant createdAt;
   @UpdateTimestamp
   private Instant updatedAt;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  @JsonManagedReference
+  private List<Pedido> pedidos = new ArrayList<>();
 }

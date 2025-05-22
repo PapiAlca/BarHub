@@ -86,4 +86,12 @@ public class PedidoServiceImpl implements PedidoService {
             return null;
         }
     }
+
+    public List<Pedido> findPedidosConDetallesByUsuarioId(Long usuarioId) {
+        return pedidoRepository.findByUsuarioIdWithDetalles(usuarioId);
+    }
+
+    public List<Pedido> findByUsuarioIdWithDetalles(Long usuarioId) {
+        return pedidoRepository.findByUsuarioIdWithDetalles(usuarioId);
+    }
 }

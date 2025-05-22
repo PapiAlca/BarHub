@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 @Slf4j
 @RestController
-@RequestMapping("/pedidos")
-public class PedidoController {
+@RequestMapping("/seguimientos")
+public class SeguimientoController {
     @Autowired
     private PedidoService pedidoService;
 
@@ -72,5 +72,47 @@ public class PedidoController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorDto.from("Pedido no encontrado " + e.getMessage()));
         }
+    }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public ResponseEntity<?> getPedidosByUsuario(
+            @PathVariable Long usuarioId
+    ) {
+        try {
+            List<Pedido> pedidos = pedidoService.findByUsuarioIdWithDetalles(usuarioId);
+
+            // Convertir a DTO para evitar recursividad en JSON
+            List<PedidoDTO> response = pedidos.stream()
+                    .map(this::convertirADto)
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Error: " + e.getMessage());
+        }
+    }
+
+    private PedidoDTO convertirADto(Pedido pedido) {
+        PedidoDTO dto = new PedidoDTO();
+        dto.setId(pedido.getId());
+        dto.setFecha(pedido.getFecha());
+        dto.setEstado(pedido.getEstado());
+        dto.setTotal(pedido.getPrecioTotal());
+
+        // Convertir detalles
+        List<DetallePedidoDto> detallesDto = pedido.getDetalles().stream()
+                .map(detalle -> {
+                    DetallePedidoDto detalleDto = new DetallePedidoDto();
+                    detalleDto.setProductoNombre(detalle.getProducto().getNombre());
+                    detalleDto.setCantidad(detalle.getCantidad());
+                    detalleDto.setPrecioUnitario(detalle.getPrecioUnitario());
+                    return detalleDto;
+                })
+                .collect(Collectors.toList());
+
+        dto.setDetalles(detallesDto);
+        return dto;
     }
 }

@@ -29,7 +29,7 @@
           <tbody *ngIf="pedidos.length > 0; else sinPedidos">
             <tr *ngFor="let pedido of pedidos">
                 <td>{{ pedido.usuario?.username || 'Usuario no encontrado' }}</td>
-                <td>{{ pedido.mesa?.codigoqr || 'Mesa no encontrada' }}</td>
+                <td>{{ pedido.mesa?.codigoqr || 'Mesa no encontrada' }}</td>              
                 <td>{{ pedido.estado }}</td>
                 <td>{{ pedido.fecha }}</td>
                 <td>{{ pedido.total }}</td>

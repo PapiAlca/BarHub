@@ -14,4 +14,6 @@ public interface PedidoService {
     void delete(long id);
 
     Pedido update(long id, Pedido entity);
+
+    List<Pedido> findByUsuarioIdWithDetalles(Long usuarioId);
 }

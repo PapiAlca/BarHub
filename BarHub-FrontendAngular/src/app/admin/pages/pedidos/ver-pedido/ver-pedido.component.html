@@ -25,8 +25,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ pedido.id_user || 'Usuario no encontrado' }}</td>
-                    <td>{{ pedido.id_mesa || 'Mesa no encontrada' }}</td>
+                    <td>{{ getUserName(pedido.id_user) }}</td>
+                    <td>{{ getMesaCodigo(pedido.id_mesa) }}</td>
                     <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{ pedido.estado }}</td>
                     <td style="color: rgb(84, 84, 84);">{{ pedido.fecha }}</td>
                     <td style="color: rgb(84, 84, 84);" class="ps-4" scope="row">{{ pedido.total }}</td>

@@ -2,6 +2,8 @@ package com.daw2.barhub.model.entity;
 
 import com.daw2.barhub.auth.models.User;
 import com.daw2.barhub.model.Enum.EstadoPedido;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
@@ -11,7 +13,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,7 +30,8 @@ public class Pedido {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user", nullable = true)
+    @JoinColumn(name = "id_user", nullable = false)
+    @JsonBackReference
     private User user;
 
     @ManyToOne
@@ -59,4 +64,8 @@ public class Pedido {
     public Long getMesaId() {
         return (mesa != null) ? mesa.getId() : null;
     }
+
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<DetallePedido> detalles = new ArrayList<>();
 }

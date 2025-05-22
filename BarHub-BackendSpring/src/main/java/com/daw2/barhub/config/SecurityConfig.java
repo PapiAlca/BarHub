@@ -34,6 +34,7 @@ public class SecurityConfig {
                                 "/pagos/**",
                                 "/pedidos/**",
                                 "/productos/**",
+                                "/seguimientos/**",
                                 "/sesiones_qr/**"
                         ).permitAll()
                         .anyRequest().authenticated()

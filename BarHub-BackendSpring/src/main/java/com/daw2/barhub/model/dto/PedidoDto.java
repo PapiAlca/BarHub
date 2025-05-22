@@ -2,6 +2,7 @@ package com.daw2.barhub.model.dto;
 
 import com.daw2.barhub.auth.models.User;
 import com.daw2.barhub.model.Enum.EstadoPedido;
+import com.daw2.barhub.model.dto.seguimiento.DetallePedidoDto;
 import com.daw2.barhub.model.entity.Mesa;
 import com.daw2.barhub.model.entity.Pedido;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -87,4 +88,5 @@ public class PedidoDto {
 
         return pedido;
     }
+
 }

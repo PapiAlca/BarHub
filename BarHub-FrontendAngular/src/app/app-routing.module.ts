@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CartaComponent } from './public/carta/carta.component';
 import { ConfirmarPedidoComponent } from './public/confirmar-pedido/confirmar-pedido.component';
+import { SeguimientoPedidosComponent } from './public/seguimiento-pedidos/seguimiento-pedidos.component';
 
 const routes: Routes = [
   { path: 'home', loadChildren: () => import('./main/main.module').then(m => m.MainModule)},
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), },
   { path: 'carta', component: CartaComponent },
   { path: 'confirmar-pedido', component: ConfirmarPedidoComponent },
+  { path: 'seguimiento-pedidos', component: SeguimientoPedidosComponent },
   { path: '**', redirectTo: 'home'}
 ];
 

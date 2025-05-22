@@ -9,6 +9,7 @@ import { AuthInterceptor } from './auth/token.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CartaComponent } from './public/carta/carta.component';
 import { ConfirmarPedidoComponent } from './public/confirmar-pedido/confirmar-pedido.component';
+import { SeguimientoPedidosComponent } from './public/seguimiento-pedidos/seguimiento-pedidos.component';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -17,7 +18,8 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent,
     CartaComponent,
-    ConfirmarPedidoComponent
+    ConfirmarPedidoComponent,
+    SeguimientoPedidosComponent
   ],
   imports: [
     BrowserModule,
