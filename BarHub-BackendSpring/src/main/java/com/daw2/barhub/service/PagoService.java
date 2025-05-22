@@ -14,4 +14,6 @@ public interface PagoService {
     void delete(long id);
 
     Pago update(long id, Pago entity);
+
+    List<Pago> obtenerPagosPorMetodoYEstado(String metodo, String estado);
 }

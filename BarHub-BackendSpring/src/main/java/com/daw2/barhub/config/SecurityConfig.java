@@ -30,6 +30,7 @@ public class SecurityConfig {
                                 "/usuarios/**",
                                 "/roles/**",
                                 "/detalles_pedidos/**",
+                                "/detalles_pedidos/pedido/**",
                                 "/mesas/**",
                                 "/pagos/**",
                                 "/pedidos/**",

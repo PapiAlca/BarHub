@@ -29,4 +29,8 @@ export class PedidoService {
   del(pedido: Pedido): Observable<string> {
     return this.httpClient.delete(`${this.URL_PEDIDOS}/${pedido.id}`, { responseType: 'text' });
   }
+
+  getDetallesPedidos(): Observable<Pedido[]> {
+    return this.httpClient.get<Pedido[]>(`${this.URL_PEDIDOS}/getAllDetalles`);
+  }
 }

@@ -1,5 +1,6 @@
 import { Usuario } from '../../usuarios/interface/usuario';
 import { Mesa } from '../../mesas/interface/mesa';
+import { DetallesPedido } from '../../detalles_pedidos/interface/detalle';
 
 export interface Pedido {
   id?: number;
@@ -12,4 +13,5 @@ export interface Pedido {
   updated_at?: string;
   usuario?: Usuario;
   mesa?: Mesa;
+  detalles?: DetallesPedido[];
 }

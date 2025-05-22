@@ -68,13 +68,13 @@ export class PedidoService {
 
   private mapDetalleDtoToDetalle(dto: DetallePedidoDto): DetallesPedido {
     return {
-      id_pedido: 0, // Deberías obtener este valor del backend
-      id_producto: 0, // Deberías obtener este valor del backend
+      id_pedido: 0,
+      id_producto: 0,
       cantidad: dto.cantidad,
       precio_unitario: dto.precioUnitario,
       producto: {
         nombre: dto.productoNombre
-      } as any // Considera crear una interfaz Producto básica
+      } as any
     } as DetallesPedido;
   }
 }

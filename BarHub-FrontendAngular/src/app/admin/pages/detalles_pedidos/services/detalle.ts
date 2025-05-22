@@ -32,4 +32,7 @@ export class DetallesService {
     });
   }
 
+  getByPedidoId(idPedido: number): Observable<DetallesPedido[]> {
+    return this.httpClient.get<DetallesPedido[]>(`${this.URL_DETALLES}pedido/${idPedido}`);
+  }
 }

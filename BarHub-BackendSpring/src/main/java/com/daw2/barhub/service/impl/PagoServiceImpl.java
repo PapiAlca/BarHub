@@ -1,5 +1,7 @@
 package com.daw2.barhub.service.impl;
 
+import com.daw2.barhub.model.Enum.EstadoPago;
+import com.daw2.barhub.model.Enum.MetodoPago;
 import com.daw2.barhub.model.entity.Pago;
 import com.daw2.barhub.model.entity.Pedido;
 import com.daw2.barhub.model.repository.PagoRepository;
@@ -58,4 +60,12 @@ public class PagoServiceImpl implements PagoService {
             return null;
         }
     }
+
+    @Override
+    public List<Pago> obtenerPagosPorMetodoYEstado(String metodo, String estado) {
+        MetodoPago metodoEnum = MetodoPago.valueOf(metodo.toLowerCase());
+        EstadoPago estadoEnum = EstadoPago.valueOf(estado.toLowerCase());
+        return pagoRepository.findByMetodoAndEstado(metodoEnum, estadoEnum);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.daw2.barhub.controller;
 import com.daw2.barhub.model.dto.DetallePedidoDto;
 import com.daw2.barhub.model.dto.ErrorDto;
 import com.daw2.barhub.model.entity.DetallePedido;
+import com.daw2.barhub.model.repository.DetallePedidoRepository;
 import com.daw2.barhub.service.DetallePedidoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/detalles_pedidos")
 public class DetallePedidoController {
+    @Autowired
+    private DetallePedidoRepository detallePedidoRepository;
+
     @Autowired
     private DetallePedidoService detallePedidoService;
 
@@ -67,5 +71,11 @@ public class DetallePedidoController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorDto.from("El detalle del pedido no ha sido encontrado " + e.getMessage()));
         }
+    }
+
+    @GetMapping("/pedido/{pedidoId}")
+    public ResponseEntity<List<DetallePedido>> getDetallesByPedidoId(@PathVariable Long pedidoId) {
+        List<DetallePedido> detalles = detallePedidoRepository.findByPedidoId(pedidoId);
+        return ResponseEntity.ok(detalles);
     }
 }

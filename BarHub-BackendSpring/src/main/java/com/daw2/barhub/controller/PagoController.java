@@ -68,4 +68,11 @@ public class PagoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorDto.from("El pago no ha sido encontrado " + e.getMessage()));
         }
     }
+
+    @GetMapping("/pendientes/efectivo")
+    public ResponseEntity<List<Pago>> getPagosPendientesEfectivo() {
+        List<Pago> pagos = pagoService.obtenerPagosPorMetodoYEstado("efectivo", "pendiente");
+        return ResponseEntity.ok(pagos);
+    }
+
 }
