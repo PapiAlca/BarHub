@@ -17,6 +17,7 @@ export class EditarProductoComponent implements OnInit {
     nombre: [],
     descripcion: [],
     precio: [],
+    tipoProducto: [],
     imagen: []
   });
   editar: boolean = false;
@@ -66,6 +67,7 @@ export class EditarProductoComponent implements OnInit {
       nombre: this.formulario.value.nombre,
       descripcion: this.formulario.value.descripcion,
       precio: this.formulario.value.precio,
+      tipoProducto: this.formulario.value.tipoProducto,
       imagen: this.formulario.value.imagen
     };
 

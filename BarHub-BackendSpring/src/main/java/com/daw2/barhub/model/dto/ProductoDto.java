@@ -1,6 +1,6 @@
 package com.daw2.barhub.model.dto;
 
-import com.daw2.barhub.model.Enum.EstadoMesa;
+import com.daw2.barhub.model.Enum.TipoProducto;
 import com.daw2.barhub.model.entity.Producto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +18,7 @@ public class ProductoDto {
     private String descripcion;
     private Double precio;
     private String imagen;
-    private EstadoMesa estado;
+    private TipoProducto tipoProducto;
 
     public static ProductoDto from(Producto producto) {
         ProductoDto dto = null;
@@ -30,7 +30,7 @@ public class ProductoDto {
             dto.setDescripcion(producto.getDescripcion());
             dto.setPrecio(producto.getPrecio());
             dto.setImagen(producto.getImagen());
-            dto.setEstado(producto.getEstado());
+            dto.setTipoProducto(producto.getTipoProducto());
         }
 
         return dto;
@@ -57,7 +57,7 @@ public class ProductoDto {
         producto.setDescripcion(this.getDescripcion());
         producto.setPrecio(this.getPrecio());
         producto.setImagen(this.getImagen());
-        producto.setEstado(this.getEstado());
+        producto.setTipoProducto(this.getTipoProducto());
 
         return producto;
     }

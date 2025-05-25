@@ -121,4 +121,25 @@ export class CartaComponent implements OnInit {
     // Redireccionar a la página de confirmación
     this.router.navigate(['/confirmar-pedido']);
   }
+
+  get productosPorSeccion(): { [seccion: string]: Producto[] } {
+    const secciones = ['bebida', 'entrante', 'tapa', 'postre'] as const;
+    const agrupados: { [key: string]: Producto[] } = {};
+  
+    secciones.forEach(seccion => {
+      agrupados[seccion] = this.productos.filter(p => p.tipoProducto === seccion);
+    });
+  
+    return agrupados;
+  }
+  
+  obtenerNombreSeccion(seccion: string): string {
+    const nombres: { [key: string]: string } = {
+      'bebida': 'Bebidas',
+      'entrante': 'Entrantes',
+      'tapa': 'Tapas Principales',
+      'postre': 'Postres'
+    };
+    return nombres[seccion] || seccion;
+  }  
 }

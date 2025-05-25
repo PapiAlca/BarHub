@@ -18,8 +18,8 @@ INSERT INTO mesas (codigoQR, estado, created_at, updated_at) VALUES ('QR003', 'D
 INSERT INTO mesas (codigoQR, estado, created_at, updated_at) VALUES ('QR004', 'OCUPADA', NOW(), NOW());
 INSERT INTO mesas (codigoQR, estado, created_at, updated_at) VALUES ('QR005', 'RESERVADA', NOW(), NOW());
 
-INSERT INTO productos (nombre, descripcion, precio, imagen, created_at, updated_at) VALUES ('Coca Cola', 'Bebida gaseosa', 1.50, 'coca_cola.jpg', NOW(), NOW());
-INSERT INTO productos (nombre, descripcion, precio, imagen, created_at, updated_at) VALUES ('Tercio', 'Cerveza', 2.50, 'cruzcampo.jpg', NOW(), NOW());
-INSERT INTO productos (nombre, descripcion, precio, imagen, created_at, updated_at) VALUES ('Croquetas', 'Entrante caliente', 3.50, 'croquetas.jpg', NOW(), NOW());
-INSERT INTO productos (nombre, descripcion, precio, imagen, created_at, updated_at) VALUES ('Serranito', 'Bocadillo de Jamón y Lomo', 4.50, 'serranito.jpg', NOW(), NOW());
-INSERT INTO productos (nombre, descripcion, precio, imagen, created_at, updated_at) VALUES ('Brownie', 'Postre', 3.00, 'brownie.jpg', NOW(), NOW());
+INSERT INTO productos (nombre, descripcion, precio, imagen, tipo_producto, created_at, updated_at) VALUES ('Coca Cola', 'Bebida gaseosa', 1.50, 'coca_cola.jpg', 'bebida', NOW(), NOW());
+INSERT INTO productos (nombre, descripcion, precio, imagen, tipo_producto, created_at, updated_at) VALUES ('Tercio', 'Cerveza', 2.50, 'cruzcampo.jpg', 'bebida', NOW(), NOW());
+INSERT INTO productos (nombre, descripcion, precio, imagen, tipo_producto, created_at, updated_at) VALUES ('Croquetas', 'Entrante caliente', 3.50, 'croquetas.jpg', 'entrante', NOW(), NOW());
+INSERT INTO productos (nombre, descripcion, precio, imagen, tipo_producto, created_at, updated_at) VALUES ('Serranito', 'Bocadillo de Jamón y Lomo', 4.50, 'serranito.jpg', 'tapa', NOW(), NOW());
+INSERT INTO productos (nombre, descripcion, precio, imagen, tipo_producto, created_at, updated_at) VALUES ('Brownie', 'Postre', 3.00, 'brownie.jpg', 'postre', NOW(), NOW());

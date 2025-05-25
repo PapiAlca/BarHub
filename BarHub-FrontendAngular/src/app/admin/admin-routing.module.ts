@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { RoleGuard } from '../auth/role.guard';
 
 // Ruta Bienvenida Admin
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
@@ -43,143 +43,54 @@ import { VerSesionComponent } from './pages/sesiones_qr/ver-sesion/ver-sesion.co
 const routes: Routes = [
   {
     path: '',
+    canActivate: [RoleGuard],
+    data: { roles: ['ROLE_ADMIN'] },
     children: [
-      {
-        path: '',
-        component: BienvenidaComponent
-      },
+      { path: '', component: BienvenidaComponent },
 
       // Detalles de los pedidos
-      {
-        path: 'crear-detalle',
-        component: EditarDetalleComponent,
-      },
-      {
-        path: 'editar-detalle/:id',
-        component: EditarDetalleComponent
-      },
-      {
-        path: 'gestionar-detalles',
-        component: GestionarDetalleComponent
-      },
-      {
-        path: 'ver-detalle/:id',
-        component: VerDetalleComponent
-      },
+      { path: 'crear-detalle', component: EditarDetalleComponent },
+      { path: 'editar-detalle/:id', component: EditarDetalleComponent },
+      { path: 'gestionar-detalles', component: GestionarDetalleComponent },
+      { path: 'ver-detalle/:id', component: VerDetalleComponent },
 
       // Mesas
-      {
-        path: 'crear-mesa',
-        component: EditarMesaComponent,
-      },
-      {
-        path: 'editar-mesas/:id',
-        component: EditarMesaComponent
-      },
-      {
-        path: 'gestionar-mesas',
-        component: GestionarMesaComponent
-      },
-      {
-        path: 'ver-mesa/:id',
-        component: VerMesaComponent
-      },
+      { path: 'crear-mesa', component: EditarMesaComponent },
+      { path: 'editar-mesas/:id', component: EditarMesaComponent },
+      { path: 'gestionar-mesas', component: GestionarMesaComponent },
+      { path: 'ver-mesa/:id', component: VerMesaComponent },
 
       // Pagos
-      {
-        path: 'crear-pago',
-        component: EditarPagoComponent,
-      },
-      {
-        path: 'editar-pago/:id',
-        component: EditarPagoComponent
-      },
-      {
-        path: 'gestionar-pagos',
-        component: GestionarPagoComponent
-      },
-      {
-        path: 'ver-pago/:id',
-        component: VerPagoComponent
-      },
+      { path: 'crear-pago', component: EditarPagoComponent },
+      { path: 'editar-pago/:id', component: EditarPagoComponent },
+      { path: 'gestionar-pagos', component: GestionarPagoComponent },
+      { path: 'ver-pago/:id', component: VerPagoComponent },
 
       // Pedidos
-      {
-        path: 'crear-pedido',
-        component: EditarPedidoComponent,
-      },
-      {
-        path: 'editar-pedido/:id',
-        component: EditarPedidoComponent
-      },
-      {
-        path: 'gestionar-pedidos',
-        component: GestionarPedidoComponent
-      },
-      {
-        path: 'ver-pedido/:id',
-        component: VerPedidoComponent
-      },
+      { path: 'crear-pedido', component: EditarPedidoComponent },
+      { path: 'editar-pedido/:id', component: EditarPedidoComponent },
+      { path: 'gestionar-pedidos', component: GestionarPedidoComponent },
+      { path: 'ver-pedido/:id', component: VerPedidoComponent },
 
       // Productos
-      {
-        path: 'crear-producto',
-        component: EditarProductoComponent,
-      },
-      {
-        path: 'editar-productos/:id',
-        component: EditarProductoComponent
-      },
-      {
-        path: 'gestionar-productos',
-        component: GestionarProductoComponent
-      },
-      {
-        path: 'ver-producto/:id',
-        component: VerProductoComponent
-      },
+      { path: 'crear-producto', component: EditarProductoComponent },
+      { path: 'editar-productos/:id', component: EditarProductoComponent },
+      { path: 'gestionar-productos', component: GestionarProductoComponent },
+      { path: 'ver-producto/:id', component: VerProductoComponent },
 
       // Usuarios
-      {
-        path: 'crear-usuario',
-        component: EditarUsuarioComponent,
-      },
-      {
-        path: 'editar-usuarios/:id',
-        component: EditarUsuarioComponent
-      },
-      {
-        path: 'gestionar-usuarios',
-        component: GestionarUsuarioComponent
-      },
-      {
-        path: 'ver-usuario/:id',
-        component: VerUsuarioComponent
-      },
+      { path: 'crear-usuario', component: EditarUsuarioComponent },
+      { path: 'editar-usuarios/:id', component: EditarUsuarioComponent },
+      { path: 'gestionar-usuarios', component: GestionarUsuarioComponent },
+      { path: 'ver-usuario/:id', component: VerUsuarioComponent },
 
       // Sesiones
-      {
-        path: 'crear-sesion',
-        component: EditarSesionComponent,
-      },
-      {
-        path: 'editar-sesion/:id',
-        component: EditarSesionComponent
-      },
-      {
-        path: 'gestionar-sesiones',
-        component: GestionarSesionComponent
-      },
-      {
-        path: 'ver-sesion/:id',
-        component: VerSesionComponent
-      },
-    
-      {
-        path: '**',
-        redirectTo: ''
-      }
+      { path: 'crear-sesion', component: EditarSesionComponent },
+      { path: 'editar-sesion/:id', component: EditarSesionComponent },
+      { path: 'gestionar-sesiones', component: GestionarSesionComponent },
+      { path: 'ver-sesion/:id', component: VerSesionComponent },
 
+      { path: '**', redirectTo: '' }
     ]
   }
 ];

@@ -4,6 +4,7 @@ export interface Producto {
     descripcion:            string,
     precio:                 number,
     imagen:                 string,
+    tipoProducto:          string,
     created_at?:            string,
     updated_at?:            string,
 }

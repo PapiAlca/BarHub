@@ -21,20 +21,20 @@
                   <a class="nav-link" routerLink="/seguimiento-pedidos" style="color: #f1f2f6;">Sigue tu pedido</a>
                 </li>
                 <!-- Estado mesas empleado -->
-                <li class="nav-item"> <!-- *ngIf="isEmple o isAdmin" -->
+                <li class="nav-item" *ngIf="isEmple || isAdmin">
                   <a class="nav-link" routerLink="empleado/gestionar-mesas" style="color: #f1f2f6;">Estado mesas</a>
                 </li>
                 <!-- Estado pagos empleado -->
-                <li class="nav-item"> <!-- *ngIf="isEmple o isAdmin" -->
+                <li class="nav-item" *ngIf="isEmple || isAdmin">
                   <a class="nav-link" routerLink="empleado/gestionar-pagos" style="color: #f1f2f6;">Pagos</a>
                 </li>
                 <!-- Estado comandas empleado -->
-                <li class="nav-item"> <!-- *ngIf="isEmple o isAdmin" -->
+                <li class="nav-item" *ngIf="isEmple || isAdmin">
                   <a class="nav-link" routerLink="empleado/gestionar-comandas" style="color: #f1f2f6;">Comandas</a>
                 </li>
                 <!-- Cuadro de mandos para Admin -->
-                <li class="nav-item"> <!-- *ngIf="isAdmin" -->
-                    <a class="nav-link" routerLink="admin" style="color: #f1f2f6;">Admin</a>
+                <li class="nav-item" *ngIf="isAdmin">
+                  <a class="nav-link" routerLink="admin" style="color: #f1f2f6;">Admin</a>
                 </li>
             </ul>
 
@@ -62,7 +62,6 @@
         </li>
       </ul>
     </div>
-
   
     </div>
     </div>

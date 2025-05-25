@@ -27,18 +27,29 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.form.invalid) return;
-
+  
     const credentials = {
       username: this.form.value.username,
       password: this.form.value.password
     };
-
+  
     this.authService.login(credentials).subscribe({
-      next: () => this.router.navigate(['/carta']),
+      next: (res) => {
+        localStorage.setItem('token', res.token);
+      
+        const payload = JSON.parse(atob(res.token.split('.')[1]));
+
+        localStorage.setItem('roles', JSON.stringify(payload.roles));
+        localStorage.setItem('username', payload.username);
+      
+        console.log('roles:', JSON.stringify(payload.roles))
+        this.router.navigate(['/carta']);
+      },
       error: (err) => {
         console.error('Error de login:', err);
         this.errorMessage = 'Credenciales inválidas o error del servidor';
       }
     });
   }
+  
 }

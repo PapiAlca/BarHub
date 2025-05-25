@@ -16,6 +16,8 @@ import { SeguimientoPedidosComponent } from './public/seguimiento-pedidos/seguim
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './public/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { AppComponent } from './app.component';
     GestionarMesasEmpleadoComponent,
     GestionarPagosEfectivoComponent,
     SeguimientoPedidosComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     UicomponentsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],  
   exports: [
     CartaComponent

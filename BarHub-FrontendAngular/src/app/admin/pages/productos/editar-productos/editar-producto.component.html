@@ -44,6 +44,18 @@
 
         <div class="row">
             <div class="col-md-12 mb-3">
+                <label for="tipo" class="form-label">Tipo:</label>
+                <select id="tipoProducto" formControlName="tipoProducto" class="form-control" required>
+                  <option value="bebida">Bebida</option>
+                  <option value="entrante">Entrante</option>
+                  <option value="tapa">Tapa</option>
+                  <option value="postre">Postre</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 mb-3">
               <label for="imagen" class="form-label">Imagen:</label>
               <input formControlName="imagen" type="file" class="form-control" id="imagen" accept=".png, .jpg, .jpeg, image/png, image/jpeg">
             </div>

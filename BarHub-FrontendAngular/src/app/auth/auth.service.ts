@@ -68,10 +68,20 @@ export class AuthService {
     this.roles = roles;
   }
 
-  hasRole(role: string): boolean {
-    return this.roles.includes(role);
+  getRoles(): string[] {
+    const roles = localStorage.getItem('roles');
+    return roles ? JSON.parse(roles) : [];
   }
-
+  
+  hasRole(roles: string | string[]): boolean {
+    const userRoles = this.getRoles();
+    if (Array.isArray(roles)) {
+      return roles.some(role => userRoles.includes(role));
+    } else {
+      return userRoles.includes(roles);
+    }
+  }
+  
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }

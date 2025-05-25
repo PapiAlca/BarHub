@@ -1,6 +1,6 @@
 package com.daw2.barhub.model.entity;
 
-import com.daw2.barhub.model.Enum.EstadoMesa;
+import com.daw2.barhub.model.Enum.TipoProducto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,9 +32,9 @@ public class Producto {
     @Column
     private String imagen;
 
-    @Column
+    @Column(name = "tipo_producto", nullable = false)
     @Enumerated(EnumType.STRING)
-    private EstadoMesa estado;
+    private TipoProducto tipoProducto;
 
     @CreationTimestamp
     private Instant createdAt;

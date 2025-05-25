@@ -23,10 +23,10 @@ export class MenuComponent {
   }
 
   get isAdmin(): boolean {
-    return this.authService.hasRole('ROLE_ADMIN');
+    return this.authService.hasRole(['ROLE_ADMIN']);
   }
 
   get isEmple(): boolean {
-    return this.authService.hasRole('ROLE_EMPLEADO');
+    return this.authService.hasRole(['ROLE_EMPLEADO', 'ROLE_ADMIN']);
   }
 }

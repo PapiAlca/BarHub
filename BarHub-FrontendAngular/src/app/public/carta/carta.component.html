@@ -1,4 +1,4 @@
-<h2 class="titulo-carta">CARTA BARHUB</h2>
+<h2 class="titulo-carta">CARTA LA AVENIDA</h2>
 
 <div class="mesa-input">
   <label for="idMesa">Número de Mesa:</label>
@@ -15,23 +15,27 @@
   </select>
 </div>
 
-<div class="productos">
-  <div class="producto" *ngFor="let producto of productos">
-    <div class="img-box">
-      <img [src]="producto.imagen" class="img-producto" alt="{{producto.nombre}}">
-    </div>
-    <div class="info-box">
-      <h4 class="nombre">{{ producto.nombre }}</h4>
-      <div class="desc">{{ producto.descripcion }}</div>
-      <div class="precio">{{ producto.precio | currency:'EUR' }}</div>
-      <div class="acciones">
-        <button class="remove-btn" *ngIf="getCantidad(producto) > 0" (click)="onRemove(producto)">
-          <span class="material-icons">-</span>
-        </button>
-        <span class="cantidad" *ngIf="getCantidad(producto) > 0">{{ getCantidad(producto) }}</span>
-        <button class="add-btn" (click)="onAdd(producto)">
-          <span class="material-icons">+</span>
-        </button>
+<!-- Secciones de la carta -->
+<div *ngFor="let seccion of ['bebida', 'entrante', 'tapa', 'postre']">
+  <h3 class="seccion-titulo">{{ obtenerNombreSeccion(seccion) }}</h3>
+  <div class="productos-grid" *ngIf="productosPorSeccion[seccion] && productosPorSeccion[seccion].length > 0">
+    <div class="producto" *ngFor="let producto of productosPorSeccion[seccion]">
+      <div class="img-box">
+        <img [src]="producto.imagen" class="img-producto" alt="{{producto.nombre}}">
+      </div>
+      <div class="info-box">
+        <h4 class="nombre">{{ producto.nombre }}</h4>
+        <div class="desc">{{ producto.descripcion }}</div>
+        <div class="precio">{{ producto.precio | currency:'EUR' }}</div>
+        <div class="acciones">
+          <button class="remove-btn" *ngIf="getCantidad(producto) > 0" (click)="onRemove(producto)">
+            <span class="material-icons">-</span>
+          </button>
+          <span class="cantidad" *ngIf="getCantidad(producto) > 0">{{ getCantidad(producto) }}</span>
+          <button class="add-btn" (click)="onAdd(producto)">
+            <span class="material-icons">+</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
