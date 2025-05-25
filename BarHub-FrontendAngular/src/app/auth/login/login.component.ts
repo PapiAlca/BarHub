@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   form: FormGroup;
   errorMessage: string = '';
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(
     private fb: FormBuilder,

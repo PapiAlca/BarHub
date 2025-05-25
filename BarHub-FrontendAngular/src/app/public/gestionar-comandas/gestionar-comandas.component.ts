@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PagoService, Pago } from '../services/pago';
+import { PagoService } from '../../admin/pages/pagos/services/pago';
 import { DetallesService } from '../../admin/pages/detalles_pedidos/services/detalle';
 import { PedidoService } from '../../admin/pages/pedidos/services/pedido';
 import { DetallesPedido } from '../../admin/pages/detalles_pedidos/interface/detalle';
+import { Pago } from '../../admin/pages/pagos/interface/pago';
 import { Pedido } from '../../admin/pages/pedidos/interface/pedido';
 
 @Component({
@@ -12,17 +13,16 @@ import { Pedido } from '../../admin/pages/pedidos/interface/pedido';
 })
 export class GestionarComandasComponent implements OnInit {
   pedidos: Pedido[] = [];
-  detallesMap: { [pedidoId: number]: DetallesPedido[] } = {};
+  detalles: DetallesPedido[] = [];
   estados = [
     { value: 'pendiente', label: 'Pendiente' },
     { value: 'preparado', label: 'Preparado' },
     { value: 'servido', label: 'Servido' }
   ];
 
-  constructor(private detalleService: DetallesService, private pedidoService: PedidoService, private pagoService: PagoService) {}
+  constructor(private detalleService: DetallesService, private pagoService: PagoService, private pedidoService: PedidoService) {}
 
   ngOnInit() {
-    //this.cargarPagos();
     this.cargarPedidos();
   }
 
@@ -31,12 +31,13 @@ export class GestionarComandasComponent implements OnInit {
     this.pedidoService.get().subscribe(pedidos => {
         this.pedidos = pedidos.filter(p => p.estado !== 'servido');
         this.pedidos.forEach(pedido => {
-          this.detalleService.getByPedidoId(pedido.id!).subscribe(detalles => {
-            this.detallesMap[pedido.id!] = detalles;
-          });
+            this.detalleService.getByPedidoId(pedido.id!).subscribe(detalles => {
+                pedido.detalles = detalles;
+            });      
         });
-      });
+    });
   }
+
 
   cambiarEstado(pedido: Pedido, nuevoEstado: string) {
     if (pedido.estado === nuevoEstado) return;

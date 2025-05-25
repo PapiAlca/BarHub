@@ -25,7 +25,7 @@ import { AppComponent } from './app.component';
     GestionarComandasComponent,
     GestionarMesasEmpleadoComponent,
     GestionarPagosEfectivoComponent,
-    SeguimientoPedidosComponent
+    SeguimientoPedidosComponent,
   ],
   imports: [
     BrowserModule,
