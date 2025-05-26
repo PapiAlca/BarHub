@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './public/home/home.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HomeComponent } from './public/home/home.component';
     GestionarPagosEfectivoComponent,
     SeguimientoPedidosComponent,
     HomeComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -35,11 +35,6 @@ import { EditarUsuarioComponent } from './pages/usuarios/editar-usuarios/editar-
 import { GestionarUsuarioComponent } from './pages/usuarios/gestionar-usuarios/gestionar-usuario.component';
 import { VerUsuarioComponent } from './pages/usuarios/ver-usuario/ver-usuario.component';
 
-// Rutas Sesiones
-import { EditarSesionComponent } from './pages/sesiones_qr/editar-sesiones/editar-sesiones.component';
-import { GestionarSesionComponent } from './pages/sesiones_qr/gestionar-sesiones/gestionar-sesion.component';
-import { VerSesionComponent } from './pages/sesiones_qr/ver-sesion/ver-sesion.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -83,12 +78,6 @@ const routes: Routes = [
       { path: 'editar-usuarios/:id', component: EditarUsuarioComponent },
       { path: 'gestionar-usuarios', component: GestionarUsuarioComponent },
       { path: 'ver-usuario/:id', component: VerUsuarioComponent },
-
-      // Sesiones
-      { path: 'crear-sesion', component: EditarSesionComponent },
-      { path: 'editar-sesion/:id', component: EditarSesionComponent },
-      { path: 'gestionar-sesiones', component: GestionarSesionComponent },
-      { path: 'ver-sesion/:id', component: VerSesionComponent },
 
       { path: '**', redirectTo: '' }
     ]

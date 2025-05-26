@@ -4,7 +4,7 @@ import { Pedido } from '../interface/pedido';
 import { DialogService } from 'src/app/main/services/shared/services/dialog.service';
 import { UsuarioService } from "../../usuarios/services/usuario";
 import { MesaService } from "../../mesas/services/mesa";
-import { tap } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-gestionar-pedido',
@@ -23,10 +23,20 @@ export class GestionarPedidoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.usuarioService.get().subscribe(data => this.users = data);
-    this.mesaService.get().subscribe(data => this.mesas = data);
-    
-    this.cargarPedidos();
+    forkJoin([
+      this.usuarioService.get(),
+      this.mesaService.get(),
+      this.pedidoService.get()
+    ]).subscribe(([users, mesas, pedidos]) => {
+      this.users = users;
+      this.mesas = mesas;
+      this.pedidos = pedidos.map(pedido => ({
+        ...pedido,
+        usuario: this.users.find(u => u.id === pedido.id_user),
+        mesa: this.mesas.find(m => m.id === pedido.id_mesa)
+      }));
+      console.log("Pedidos cargados:", this.pedidos);
+    });
   }
 
   cargarPedidos() {

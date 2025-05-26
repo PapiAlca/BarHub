@@ -15,13 +15,12 @@
   </select>
 </div>
 
-<!-- Secciones de la carta -->
 <div *ngFor="let seccion of ['bebida', 'entrante', 'tapa', 'postre']">
   <h3 class="seccion-titulo">{{ obtenerNombreSeccion(seccion) }}</h3>
   <div class="productos-grid" *ngIf="productosPorSeccion[seccion] && productosPorSeccion[seccion].length > 0">
     <div class="producto" *ngFor="let producto of productosPorSeccion[seccion]">
       <div class="img-box">
-        <img [src]="producto.imagen" class="img-producto" alt="{{producto.nombre}}">
+        <img [src]="'assets/images/productos/' + producto.imagen" class="img-producto" alt="{{producto.nombre}}">
       </div>
       <div class="info-box">
         <h4 class="nombre">{{ producto.nombre }}</h4>
