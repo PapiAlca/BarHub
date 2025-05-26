@@ -49,6 +49,9 @@ public class Pedido {
     @Digits(integer = 10, fraction = 2)
     private BigDecimal precioTotal;
 
+    @Column(name = "payment_method_id")
+    private String paymentMethodId;
+
     @CreationTimestamp
     private Instant createdAt;
 

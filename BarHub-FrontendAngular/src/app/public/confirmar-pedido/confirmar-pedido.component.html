@@ -40,28 +40,14 @@
           Efectivo
         </label>
         <label>
-          <input type="radio" name="metodoPago" [(ngModel)]="metodoPago" value="tarjeta">
+          <input type="radio" name="metodoPago" [(ngModel)]="metodoPago" value="tarjeta" (change)="onTarjetaSelected()">
           Tarjeta
         </label>
       </div>
     </div>
     <div class="tarjeta-form" *ngIf="metodoPago === 'tarjeta'">
-      <label>
-        Número de tarjeta:
-        <input type="text" [(ngModel)]="datosTarjeta.numero" maxlength="16" placeholder="1234 5678 9012 3456">
-      </label>
-      <label>
-        Titular:
-        <input type="text" [(ngModel)]="datosTarjeta.titular" placeholder="Nombre en la tarjeta">
-      </label>
-      <label>
-        Caducidad:
-        <input type="text" [(ngModel)]="datosTarjeta.caducidad" maxlength="5" placeholder="MM/AA">
-      </label>
-      <label>
-        CVV:
-        <input type="password" [(ngModel)]="datosTarjeta.cvv" maxlength="4" placeholder="CVV">
-      </label>
+      <div id="card-element"></div>
+      <div class="card-errors" role="alert">{{ cardErrors }}</div>
     </div>
     <div class="acciones">
       <button class="cancelar-btn" (click)="cancelarPedido()">Cancelar</button>

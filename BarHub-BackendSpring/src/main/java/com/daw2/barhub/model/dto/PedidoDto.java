@@ -30,6 +30,7 @@ public class PedidoDto {
     private Date fecha;
     private EstadoPedido estado;
     private BigDecimal total;
+    private String paymentMethodId;
 
     public static PedidoDto from(Pedido pedido) {
         PedidoDto dto = null;
@@ -47,6 +48,7 @@ public class PedidoDto {
             dto.setFecha(pedido.getFecha());
             dto.setEstado(pedido.getEstado());
             dto.setTotal(pedido.getPrecioTotal());
+            dto.setPaymentMethodId(pedido.getPaymentMethodId());
         }
 
         return dto;
@@ -85,8 +87,8 @@ public class PedidoDto {
         pedido.setFecha(getFecha());
         pedido.setEstado(getEstado());
         pedido.setPrecioTotal(getTotal());
+        pedido.setPaymentMethodId(this.getPaymentMethodId());
 
         return pedido;
     }
-
 }

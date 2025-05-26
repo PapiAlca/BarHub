@@ -146,18 +146,36 @@ input[type="radio"] {
 }
 
 .tarjeta-form {
-  justify-content: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px 20px;
+  margin: 24px 0;
+  padding: 24px 24px 24px 24px;
   background: rgba(255,255,255,0.97);
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(10,35,66,0.10);
   border: 2px solid #7DA7D9;
-  padding: 22px 24px 10px 24px;
-  margin: 24px 0 24px 0;
   max-width: 480px;
+  min-width: 340px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+#card-element {
+  width: 100%;
+  min-height: 56px;
+  padding: 16px 18px;
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+}
+
+.card-errors {
+  color: #e74c3c;
+  margin: 8px 0 0 0;
+  font-size: 1rem;
+  min-height: 24px;
+}
+
 
 .tarjeta-form label {
   font-weight: 600;
@@ -197,16 +215,24 @@ input[type="radio"] {
   width: 80px;
 }
 
-/* Responsive para móvil */
-@media (max-width: 600px) {
-  .tarjeta-form {
-    grid-template-columns: 1fr;
-    padding: 16px 8px 8px 8px;
-    gap: 12px 0;
-    max-width: 100%;
-  }
+#card-element {
+  padding: 12px;
+  border: 2px solid #7DA7D9;
+  border-radius: 8px;
+  margin: 10px 0;
+  background: white;
 }
 
+#card-element iframe {
+  height: 40px !important;
+}
+
+.card-errors {
+  color: #e74c3c;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  min-height: 20px;
+}
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -224,5 +250,16 @@ input[type="radio"] {
   .acciones {
     flex-direction: column;
     gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .tarjeta-form {
+      min-width: 100%;
+      padding: 16px 4vw;
+    }
+    #card-element {
+      font-size: 1.1rem;
+      min-height: 48px;
+    }
   }
 }

@@ -14,4 +14,5 @@ export interface Pedido {
   usuario?: Usuario;
   mesa?: Mesa;
   detalles?: DetallesPedido[];
+  paymentMethodId?: string;
 }

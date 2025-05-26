@@ -8,9 +8,14 @@ import lombok.*;
 @Getter
 @Setter
 public class ErrorDto {
+    private String code;
     private String message;
 
     public static ErrorDto from(String message) {
-        return new ErrorDto(message);
+        return new ErrorDto(null, message);
+    }
+
+    public static ErrorDto from(String code, String message) {
+        return new ErrorDto(code, message);
     }
 }
