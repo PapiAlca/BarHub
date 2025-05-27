@@ -1,6 +1,6 @@
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { catchError, of } from 'rxjs';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent {
   form = {
     username: '',
@@ -20,6 +21,16 @@ export class RegisterComponent {
   usernameTaken = false;
   showPassword = false;
   showConfirmPassword = false;
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'error' | 'info' = 'info';
+
+  showToastMessage(message: string, type: 'success' | 'error' | 'info' = 'info') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, 3000);
+  }
 
   constructor(
     private http: HttpClient,
@@ -31,7 +42,7 @@ export class RegisterComponent {
     this.usernameTaken = false;
 
     if (this.form.password !== this.confirmPassword) {
-      alert('Las contraseñas no coinciden');
+      this.showToastMessage('Las contraseñas no coinciden');
       return;
     }
 
@@ -48,23 +59,31 @@ export class RegisterComponent {
         next: (res) => {
           if (res) {
             console.log('✅ Registro exitoso', res);
-            this.authService.login({
-              username: this.form.username,
-              password: this.form.password
-            }).subscribe({
-              next: () => {
-                this.router.navigate(['/carta']);
-              },
-              error: err => {
-                alert('Error al iniciar sesión automáticamente');
-              }
-            });
+            this.showToastMessage('Registro exitoso');
+            setTimeout(() => {
+              this.authService.login({
+                username: this.form.username,
+                password: this.form.password
+              }).subscribe({
+                next: () => {
+                  setTimeout(() => {
+                    this.router.navigate(['/carta']);
+                  }, 1500);
+                },
+                error: err => {
+                  this.showToastMessage('Error al iniciar sesión automáticamente');
+                  setTimeout(() => {
+                    this.router.navigate(['/register']);
+                  }, 10000);
+                }
+              });
+            }, 10000);
           }
         },
         error: (err) => {
           console.error('❌ Error al registrarse', err);
           if (!this.usernameTaken) {
-            alert('Error al registrarse');
+            this.showToastMessage('Error al registrarse');
           }
         }
       });

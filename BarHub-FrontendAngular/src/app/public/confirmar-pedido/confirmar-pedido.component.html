@@ -1,3 +1,10 @@
+<app-toast
+  [show]="showToast"
+  [message]="toastMessage"
+  [type]="toastType"
+  (closed)="showToast = false">
+</app-toast>
+
 <div class="confirmar-pedido" *ngIf="pedidoTemporal">
     <h2>Confirmar Pedido</h2>
     

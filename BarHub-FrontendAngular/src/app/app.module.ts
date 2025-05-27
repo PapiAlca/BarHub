@@ -14,6 +14,7 @@ import { GestionarMesasEmpleadoComponent } from './public/gestionar-mesas-emplea
 import { GestionarPagosEfectivoComponent } from './public/gestionar-pagos-efectivo/gestionar-pagos-efectivo.component';
 import { SeguimientoPedidosComponent } from './public/seguimiento-pedidos/seguimiento-pedidos.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,7 +40,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     UicomponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],  
   exports: [
     CartaComponent

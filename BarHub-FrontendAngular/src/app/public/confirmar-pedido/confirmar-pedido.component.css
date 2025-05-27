@@ -234,6 +234,22 @@ input[type="radio"] {
   min-height: 20px;
 }
 
+/* custom-modal.component.css */
+.btn-modal {
+  background: #0A2342;
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  margin: 16px 8px 0 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-modal:hover {
+  background: #4A6782;
+}
+
+
 /* Responsive */
 @media (max-width: 900px) {
   .confirmar-pedido {

@@ -1,4 +1,10 @@
 <div class="login-container">
+  <app-toast
+    [show]="showToast"
+    [message]="toastMessage"
+    [type]="toastType"
+    (closed)="showToast = false">
+  </app-toast>
   <h2>Inicio de sesión</h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <label>

@@ -1,6 +1,6 @@
 <h2 class="titulo-comandas">Gestión de Comandas</h2>
 <div *ngIf="pedidosNoServidos.length === 0" class="sin-comandas">
-  <p>No hay comandas registradas.</p>
+  <p class="sinComandas">No hay comandas registradas.</p>
 </div>
 <div *ngFor="let pedido of pedidosNoServidos" class="comanda-card">
   <div class="comanda-header">

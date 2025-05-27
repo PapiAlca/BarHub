@@ -21,6 +21,16 @@ export class CartaComponent implements OnInit {
   productos: Producto[] = [];
   productosSeleccionados: ProductoSeleccionado[] = [];
   idMesa: number | null = null;
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'error' | 'info' = 'info';
+
+  showToastMessage(message: string, type: 'success' | 'error' | 'info' = 'info') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, 3000);
+  }
 
   constructor(
     private authService: AuthService,
@@ -95,20 +105,22 @@ export class CartaComponent implements OnInit {
   confirmarPedido() {
     // Confirmar que el usuario haya iniciado sesion
     if (!this.authService.isLoggedIn()) {
-      alert('Debe iniciar sesión para continuar');
-      this.router.navigate(['/login']);
+      this.showToastMessage('Debe iniciar sesión para continuar');
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 2000);
       return;
     }
 
     // Validar que se haya seleccionado al menos un producto
     if (!this.hayProductosSeleccionados()) {
-      alert('Debe seleccionar al menos un producto');
+      this.showToastMessage('Debe seleccionar al menos un producto');
       return;
     }
 
     // Validar que se haya ingresado el ID de mesa
     if (!this.idMesa) {
-      alert('Debe ingresar el número de mesa');
+      this.showToastMessage('Debe ingresar el número de mesa');
       return;
     }
 

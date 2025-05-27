@@ -1,6 +1,6 @@
 <h2>Mis pedidos</h2>
 <div *ngIf="pedidos.length === 0">
-  <p>No tienes pedidos realizados.</p>
+  <p class="sinPedidos">No tienes pedidos realizados.</p>
 </div>
 <div *ngFor="let pedido of pedidos" class="pedido-card">
   <div class="pedido-header">
@@ -30,9 +30,4 @@
       </tbody>
     </table>
   </div>
-</div>
-
-  
-<div *ngIf="pedidos.length === 0">
-  <p>No tienes pedidos realizados.</p>
 </div>

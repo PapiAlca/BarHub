@@ -29,4 +29,8 @@ export class MenuComponent {
   get isEmple(): boolean {
     return this.authService.hasRole(['ROLE_EMPLEADO', 'ROLE_ADMIN']);
   }
+
+  get isCliente(): boolean {
+    return this.authService.hasRole(['ROLE_CLIENTE', 'ROLE_EMPLEADO', 'ROLE_ADMIN']);
+  }
 }

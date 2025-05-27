@@ -9,6 +9,18 @@
   background: none;
   width: 100%;
   }
+  .sinComandas {
+    text-align: center;
+    margin: 40px 0 10px 0;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-shadow: 2px 2px 10px #1B1B1B99;
+    background: none;
+    width: 100%;
+  }
+
   .comanda-card {
     background: #fff;
     border-radius: 12px;

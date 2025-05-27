@@ -13,6 +13,16 @@ export class LoginComponent {
   errorMessage: string = '';
   showPassword = false;
   showConfirmPassword = false;
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'error' | 'info' = 'info';
+
+  showToastMessage(message: string, type: 'success' | 'error' | 'info' = 'info') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, 3000);
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +57,7 @@ export class LoginComponent {
       },
       error: (err) => {
         console.error('Error de login:', err);
-        this.errorMessage = 'Credenciales inválidas o error del servidor';
+        this.showToastMessage('Credenciales inválidas o error del servidor');
       }
     });
   }

@@ -34,6 +34,16 @@ export class ConfirmarPedidoComponent implements OnInit {
   cardErrors: string = '';
   pedidoTemporal: PedidoTemporal | null = null;
   metodoPago: string = 'efectivo';
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'error' | 'info' = 'info';
+
+  showToastMessage(message: string, type: 'success' | 'error' | 'info' = 'info') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, 3000);
+  }
 
   constructor(
     private detalleService: DetallesService,
@@ -137,7 +147,7 @@ export class ConfirmarPedidoComponent implements OnInit {
 
     if (this.metodoPago === 'tarjeta') {
       if (!this.stripe || !this.card) {
-        alert('Error en el sistema de pagos');
+        this.showToastMessage('Error en el sistema de pagos', 'error');
         return;
       }
 
@@ -147,7 +157,7 @@ export class ConfirmarPedidoComponent implements OnInit {
       });
 
       if (error) {
-        alert(`Error de pago: ${error.message}`);
+        this.showToastMessage(error.message ?? 'Error desconocido en el pago', 'error');
         return;
       }
 
@@ -199,18 +209,20 @@ export class ConfirmarPedidoComponent implements OnInit {
               this.generarTicketPDF(pedidoCreado.id);
             }
             localStorage.removeItem('pedidoTemporal');
-            alert('Pedido realizado con éxito');
-            this.router.navigate(['/carta']);
+            this.showToastMessage('Pedido realizado con éxito', 'success');
+            setTimeout(() => {
+              this.router.navigate(['/carta']);
+            }, 2000);
           },
           error: (err) => {
+            this.showToastMessage('Error al guardar el pago', 'error');
             console.error('Error creando pago:', err);
-            alert('Error al guardar el pago');
           }
         });
       },
       error: (err) => {
+        this.showToastMessage(err.error?.message || 'Error al guardar el pedido', 'error');
         console.error('Error:', err);
-        alert(err.error?.message || 'Error al guardar el pedido');
       }
     });
   }

@@ -1,4 +1,11 @@
 <div class="register-container">
+  <app-toast
+    [show]="showToast"
+    [message]="toastMessage"
+    [type]="toastType"
+    (closed)="showToast = false">
+  </app-toast>
+
   <h2>Registro</h2>
   <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
     <label>
