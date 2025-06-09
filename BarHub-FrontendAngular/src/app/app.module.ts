@@ -13,9 +13,11 @@ import { GestionarComandasComponent } from './public/gestionar-comandas/gestiona
 import { GestionarMesasEmpleadoComponent } from './public/gestionar-mesas-empleado/gestionar-mesas-empleado.component';
 import { GestionarPagosEfectivoComponent } from './public/gestionar-pagos-efectivo/gestionar-pagos-efectivo.component';
 import { SeguimientoPedidosComponent } from './public/seguimiento-pedidos/seguimiento-pedidos.component';
+import { PoliticaPrivacidadComponent } from './public/politica-privacidad/politica-privacidad.component';
+import { TerminosCondicionesComponent } from './public/terminos-condiciones/terminos-condiciones.component';
+
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './public/home/home.component';
@@ -32,6 +34,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     SeguimientoPedidosComponent,
     HomeComponent,
     FooterComponent,
+    PoliticaPrivacidadComponent,
+    TerminosCondicionesComponent
   ],
   imports: [
     BrowserModule,

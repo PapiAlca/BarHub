@@ -10,6 +10,8 @@ import { GestionarMesasEmpleadoComponent } from './public/gestionar-mesas-emplea
 import { GestionarPagosEfectivoComponent } from './public/gestionar-pagos-efectivo/gestionar-pagos-efectivo.component';
 import { HomeComponent } from './public/home/home.component';
 import { SeguimientoPedidosComponent } from './public/seguimiento-pedidos/seguimiento-pedidos.component';
+import { PoliticaPrivacidadComponent } from './public/politica-privacidad/politica-privacidad.component';
+import { TerminosCondicionesComponent } from './public/terminos-condiciones/terminos-condiciones.component';
 
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
@@ -22,6 +24,9 @@ const routes: Routes = [
   { path: 'empleado/gestionar-pagos', component: GestionarPagosEfectivoComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_EMPLEADO', 'ROLE_ADMIN'] } },
   { path: 'home', component: HomeComponent},
   { path: 'seguimiento-pedidos', component: SeguimientoPedidosComponent },
+  { path: 'politica-privacidad', component: PoliticaPrivacidadComponent },
+  { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
+
   { path: '**', redirectTo: 'home'}
 ];
 

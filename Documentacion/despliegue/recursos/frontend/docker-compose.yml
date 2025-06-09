@@ -1,0 +1,19 @@
+services:
+  angular:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: angular
+    expose:
+      - "80"
+    networks:
+      - mi_red
+    labels:
+      caddy: barhub.duckdns.org
+      caddy.handle_path: /*
+      caddy.handle_path.reverse_proxy: "{{upstreams 80}}"
+    restart: unless-stopped
+
+networks:
+  mi_red:
+    external: true

@@ -80,10 +80,6 @@
     background: #eafaf1;
     color: #218838;
   }
-  .mesa-actions button.ocupada {
-    background: #fff4e6;
-    color: #e67e22;
-  }
   .mesa-actions button.reservada {
     background: #e3f2fd;
     color: #3498db;
@@ -95,6 +91,5 @@
   }
   
   .mesa-card.disponible { border: 2.5px solid #2ecc71; }
-  .mesa-card.ocupada { border: 2.5px solid #e67e22; }
   .mesa-card.reservada { border: 2.5px solid #3498db; }
   

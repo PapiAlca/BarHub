@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBackendSpring: 'http://localhost:8080',
+  urlBackendSpring: 'http://barhub.duckdns.org/api',
 };
 
 /*

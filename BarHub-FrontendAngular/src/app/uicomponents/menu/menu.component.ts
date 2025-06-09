@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
+  roles$ = this.authService.roles$;
   
   constructor(public authService: AuthService) {}
 

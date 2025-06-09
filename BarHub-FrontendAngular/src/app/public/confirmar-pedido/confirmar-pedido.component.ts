@@ -79,22 +79,34 @@ export class ConfirmarPedidoComponent implements OnInit {
 
   generarTicketPDF(pedidoId: number) {
     if (!this.pedidoTemporal) return;
-  
+
     const productos = this.pedidoTemporal.productos.map(item => [
-      item.producto.nombre,
-      item.producto.precio.toFixed(2) + ' €',
-      item.cantidad,
-      (item.producto.precio * item.cantidad).toFixed(2) + ' €'
+      { text: item.producto.nombre, alignment: 'left' },
+      { text: item.producto.precio.toFixed(2) + ' €', alignment: 'right' },
+      { text: item.cantidad, alignment: 'left' },
+      { text: (item.producto.precio * item.cantidad).toFixed(2) + ' €', alignment: 'right' }
     ]);
   
     const docDefinition = {
       content: [
         { text: 'BARHUB - Ticket de Compra', style: 'header' },
         { text: `Pedido Num: ${pedidoId}`, style: 'pedidoId' },
-        { text: `Fecha: ${new Date().toLocaleDateString()}` },
-        { text: `Mesa: ${this.pedidoTemporal.idMesa}` },
-        { text: `Método de pago: ${this.metodoPago}` },
+        { text: 'BARHUB SPANISH TIPICAL RESTAURANT', style: 'companyBrand' },
+        { text: 'Food Service Project S.L.', style: 'companyDetails' },
+        { text: 'C/ Avenida Sinforiano Madroñero 666, 06011 Badajoz', style: 'companyDetails' },
         { text: ' ' },
+        { text: 'C.I.F. nº: B12345678', style: 'companyDetails' },
+
+        { canvas: [ { type: 'line', x1: 0, y1: 0, x2: 148, y2: 0, lineWidth: 1, dash: { length: 2 } } ] },
+
+        { text: `Fecha Transacción: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, style: 'transactionInfo' },
+        { text: `Factura Simplificada: BH-${pedidoId.toString().padStart(6, '0')}`, style: 'transactionInfo' },
+
+        { canvas: [ { type: 'line', x1: 0, y1: 0, x2: 148, y2: 0, lineWidth: 1, dash: { length: 2 } } ] },
+
+        { text: ' ' },
+        { text: `Mesa: ${this.pedidoTemporal.idMesa}`, style: 'tableInfo' },
+
         {
           table: {
             widths: ['*', 'auto', 'auto', 'auto'],
@@ -104,16 +116,77 @@ export class ConfirmarPedidoComponent implements OnInit {
             ]
           }
         },
-        { text: ' ' },
-        {
-          text: 'Total: ' + this.calcularTotal().toFixed(2) + ' €',
-          style: 'total'
-        }
-      ],
+        { canvas: [ { type: 'line', x1: 0, y1: 0, x2: 148, y2: 0, lineWidth: 1, dash: { length: 2 } } ] },
+    
+      // Totales
+      {
+        columns: [
+          { text: 'Subtotal', style: 'totalLabel', width: '*' },
+          { text: this.calcularTotal().toFixed(2) + ' €', style: 'totalValue', width: 'auto' }
+        ]
+      },
+      {
+        columns: [
+          { text: 'IVA desglosado:', style: 'taxLabel', width: '*' },
+          { text: this.calcularTotal().toFixed(2) + ' €', style: 'totalValue', width: 'auto' }
+        ]
+      },
+      {
+        columns: [
+          { text: '10% IVA (' + this.calcularTotal().toFixed(2) + '):', style: 'taxDetail', width: '*' },
+          { text: (this.calcularTotal() * 0.10).toFixed(2) + ' €', style: 'totalValue', width: 'auto' }
+        ]
+      },
+
+      // Línea separadora
+      { canvas: [ { type: 'line', x1: 0, y1: 0, x2: 148, y2: 0, lineWidth: 1, dash: { length: 2 } } ] },
+
+      {
+        columns: [
+          { text: 'TOTAL 1 EN SALA', style: 'finalTotal', width: '*' },
+          { text: this.calcularTotal().toFixed(2) + ' €', style: 'finalTotalValue', width: 'auto' }
+        ],
+        margin: [0, 5, 0, 5]
+      },
+
+      { text: `Atendido en caja Nº ${this.pedidoTemporal.idMesa} - BarHub`, style: 'serviceInfo' },
+
+      // Línea separadora
+      { canvas: [ { type: 'line', x1: 0, y1: 0, x2: 148, y2: 0, lineWidth: 1, dash: { length: 2 } } ] },
+
+      { text: ' ' },
+      { text: '¡¡¡ MUCHAS GRACIAS POR SU VISITA !!!', style: 'thankYou' },
+      { text: ' ' },
+      { text: '¿CÓMO HA SIDO SU EXPERIENCIA?', style: 'feedback' },
+      { text: ' ' },
+      { text: 'DÍGANOSLO EN:', style: 'feedback' },
+      { text: 'www.barhub.duckdns.org/experiencia', style: 'website' }
+    ],
       styles: {
-        header: { fontSize: 20, bold: true, alignment: 'center', margin: [0, 0, 0, 10] },
-        pedidoId: { fontSize: 12, bold: true, alignment: 'center', margin: [0, 0, 0, 10] },
-        total: { fontSize: 16, bold: true, alignment: 'right' }
+        companyName: { fontSize: 12, bold: true, alignment: 'center', margin: [0, 0, 0, 2] },
+        ticketNumber: { fontSize: 10, alignment: 'center', margin: [0, 0, 0, 2] },
+        companyBrand: { fontSize: 10, bold: true, alignment: 'center', margin: [0, 0, 0, 2] },
+        companyDetails: { fontSize: 8, alignment: 'center', margin: [0, 0, 0, 1] },
+        transactionInfo: { fontSize: 8, alignment: 'left', margin: [0, 1, 0, 1] },
+        tableInfo: { fontSize: 8, alignment: 'left', margin: [0, 2, 0, 2] },
+        tableHeader: { fontSize: 8, bold: true },
+        productName: { fontSize: 8, alignment: 'left' },
+        productPrice: { fontSize: 8, alignment: 'right' },
+        totalLabel: { fontSize: 8, alignment: 'right', margin: [0, 1, 5, 1] },
+        totalValue: { fontSize: 8, alignment: 'right', margin: [0, 1, 0, 1] },
+        taxLabel: { fontSize: 8, alignment: 'right', margin: [0, 1, 5, 1] },
+        taxDetail: { fontSize: 8, alignment: 'right', margin: [0, 1, 5, 1] },
+        finalTotal: { fontSize: 10, bold: true, alignment: 'right', margin: [0, 0, 5, 0] },
+        finalTotalValue: { fontSize: 10, bold: true, alignment: 'right' },
+        serviceInfo: { fontSize: 7, alignment: 'center', margin: [0, 5, 0, 5] },
+        thankYou: { fontSize: 9, bold: true, alignment: 'center', margin: [0, 5, 0, 0] },
+        feedback: { fontSize: 8, alignment: 'center', margin: [0, 1, 0, 0] },
+        website: { fontSize: 8, alignment: 'center', margin: [0, 1, 0, 5] }
+      },
+
+      defaultStyle: {
+        font: 'Roboto',
+        fontSize: 8
       }
     };
     (pdfMake as any).createPdf(docDefinition).download('ticket_barhub.pdf');

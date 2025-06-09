@@ -2,8 +2,6 @@ package com.daw2.barhub.controller;
 
 import com.daw2.barhub.model.dto.ErrorDto;
 import com.daw2.barhub.model.dto.PedidoDto;
-import com.daw2.barhub.model.dto.seguimiento.DetallePedidoDto;
-import com.daw2.barhub.model.dto.seguimiento.PedidoDTO;
 import com.daw2.barhub.model.entity.Pedido;
 import com.daw2.barhub.model.repository.PedidoRepository;
 import com.daw2.barhub.service.PedidoService;
@@ -14,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @Slf4j

@@ -34,13 +34,18 @@
         <div class="desc">{{ producto.descripcion }}</div>
         <div class="precio">{{ producto.precio | currency:'EUR' }}</div>
         <div class="acciones">
-          <button class="remove-btn" *ngIf="getCantidad(producto) > 0" (click)="onRemove(producto)">
+          <button class="remove-btn" 
+                  *ngIf="getCantidad(producto) > 0 && isLoggedIn" 
+                  (click)="onRemove(producto)">
             <span class="material-icons">-</span>
           </button>
           <span class="cantidad" *ngIf="getCantidad(producto) > 0">{{ getCantidad(producto) }}</span>
-          <button class="add-btn" (click)="onAdd(producto)">
+          <button class="add-btn" 
+                  *ngIf="isLoggedIn" 
+                  (click)="onAdd(producto)">
             <span class="material-icons">+</span>
           </button>
+          <span class="aviso" *ngIf="!isLoggedIn">Inicia sesión para agregar productos en el carrito</span>
         </div>
       </div>
     </div>

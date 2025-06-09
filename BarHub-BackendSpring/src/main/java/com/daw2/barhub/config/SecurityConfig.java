@@ -35,8 +35,7 @@ public class SecurityConfig {
                                 "/pagos/**",
                                 "/pedidos/**",
                                 "/productos/**",
-                                "/seguimientos/**",
-                                "/sesiones_qr/**"
+                                "/seguimientos/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -46,11 +45,10 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of("http://localhost:4200"));
+        config.setAllowedOriginPatterns(List.of("http://barhub.duckdns.org"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         config.setExposedHeaders(List.of("Authorization"));

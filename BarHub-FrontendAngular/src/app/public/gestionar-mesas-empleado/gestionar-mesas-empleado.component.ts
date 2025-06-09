@@ -11,7 +11,6 @@ export class GestionarMesasEmpleadoComponent implements OnInit {
   mesas: Mesa[] = [];
   estados = [
     { value: 'disponible', label: 'Disponible', icon: 'event_available' },
-    { value: 'ocupada', label: 'Ocupada', icon: 'event_busy' },
     { value: 'reservada', label: 'Reservada', icon: 'event_note' },
   ];
 

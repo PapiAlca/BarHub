@@ -17,6 +17,7 @@ interface ProductoSeleccionado {
   styleUrls: ['./carta.component.css']
 })
 export class CartaComponent implements OnInit {
+  public isLoggedIn = false;
   mesas: Mesa[] = [];
   productos: Producto[] = [];
   productosSeleccionados: ProductoSeleccionado[] = [];
@@ -40,6 +41,7 @@ export class CartaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.mesaService.get().subscribe(data => this.mesas = data);
     this.productoService.get().subscribe(data => this.productos = data);
   }

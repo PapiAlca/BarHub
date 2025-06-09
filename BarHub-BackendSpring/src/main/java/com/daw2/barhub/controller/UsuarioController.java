@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://http://barhub.duckdns.org")
 @Slf4j
 @RestController
 @RequestMapping("/usuarios")

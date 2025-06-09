@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,8 @@ export class RegisterComponent {
     password: '',
     role: ['ROLE_CLIENTE']
   };
+  aceptaPoliticas = false;
+  private apiUrl = `${environment.urlBackendSpring}/api/auth/signup`;
   confirmPassword = '';
   usernameTaken = false;
   showPassword = false;
@@ -38,54 +41,46 @@ export class RegisterComponent {
     private router: Router
     ) {}
 
-  onSubmit(): void {
-    this.usernameTaken = false;
-
-    if (this.form.password !== this.confirmPassword) {
-      this.showToastMessage('Las contraseñas no coinciden');
-      return;
-    }
-
-    this.http.post('http://localhost:8080/api/auth/signup', this.form)
-      .pipe(
-        catchError((error) => {
-          if (error.status === 400 && error.error.message === 'Username is already taken!') {
-            this.usernameTaken = true;
-          }
-          return of(null);
-        })
-      )
-      .subscribe({
-        next: (res) => {
-          if (res) {
-            console.log('✅ Registro exitoso', res);
-            this.showToastMessage('Registro exitoso');
-            setTimeout(() => {
+    onSubmit(): void {
+      this.usernameTaken = false;
+    
+      if (this.form.password !== this.confirmPassword) {
+        this.showToastMessage('Las contraseñas no coinciden');
+        return;
+      }
+    
+      this.http.post(this.apiUrl, this.form)
+        .pipe(
+          catchError((error) => {
+            if (error.status === 400 && error.error.message === 'Username is already taken!') {
+              this.usernameTaken = true;
+            }
+            return of(null);
+          })
+        )
+        .subscribe({
+          next: (res) => {
+            if (res) {
+              this.showToastMessage('Registro exitoso');
               this.authService.login({
                 username: this.form.username,
                 password: this.form.password
               }).subscribe({
                 next: () => {
-                  setTimeout(() => {
-                    this.router.navigate(['/carta']);
-                  }, 1500);
+                  this.router.navigate(['/carta']);
                 },
                 error: err => {
                   this.showToastMessage('Error al iniciar sesión automáticamente');
-                  setTimeout(() => {
-                    this.router.navigate(['/register']);
-                  }, 10000);
                 }
               });
-            }, 10000);
+            }
+          },
+          error: (err) => {
+            console.error('❌ Error al registrarse', err);
+            if (!this.usernameTaken) {
+              this.showToastMessage('Error al registrarse');
+            }
           }
-        },
-        error: (err) => {
-          console.error('❌ Error al registrarse', err);
-          if (!this.usernameTaken) {
-            this.showToastMessage('Error al registrarse');
-          }
-        }
-      });
-  }
+        });
+    }    
 }

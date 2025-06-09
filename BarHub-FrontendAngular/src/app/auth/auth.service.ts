@@ -2,14 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt'; 
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = `${environment.urlBackendSpring}/api/auth`;
   private roles: string[] = [];
+  private rolesSubject = new BehaviorSubject<string[]>(this.getRoles());
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
+
+  roles$ = this.rolesSubject.asObservable();
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
   private tokenKey = 'token';
   private jwtHelper = new JwtHelperService();
 
@@ -20,7 +28,7 @@ export class AuthService {
     return new Observable(observer => {
       this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials).subscribe({
         next: (res) => {
-          if (!res.token) { // 👈 Verifica si el token existe
+          if (!res.token) {
             observer.error('El servidor no devolvió un token');
             return;
           }
@@ -29,16 +37,24 @@ export class AuthService {
           
           try {
             const decodedToken = this.jwtHelper.decodeToken(res.token);
+            const roles = decodedToken.roles || []; // 👈 Extrae roles del token
+            
+            // Guarda roles en localStorage
+            localStorage.setItem('roles', JSON.stringify(roles));
             
             localStorage.setItem('user', JSON.stringify({
-              id: decodedToken.id, // ← Campo crítico
+              id: decodedToken.id,
               username: decodedToken.sub
             }));
+            
+            // Actualiza los subjects
+            this.rolesSubject.next(roles);
+            this.isAuthenticatedSubject.next(true);
+            
             this.router.navigate(['/carta']);
-
             observer.next(res);
           } catch (error) {
-            localStorage.removeItem(this.tokenKey); // Limpiar token inválido
+            localStorage.removeItem(this.tokenKey);
             observer.error('Token inválido: ' + error);
           }
           observer.complete();
@@ -46,7 +62,7 @@ export class AuthService {
         error: (err) => observer.error(err)
       });
     });
-  }
+  }  
 
   register(data: { username: string; email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, data);
@@ -54,6 +70,8 @@ export class AuthService {
 
   logout(): void {
     localStorage.clear();
+    this.rolesSubject.next([]);
+    this.isAuthenticatedSubject.next(false);
     this.router.navigate(['/']);
   }
 
@@ -74,14 +92,11 @@ export class AuthService {
     return roles ? JSON.parse(roles) : [];
   }
   
-  hasRole(roles: string | string[]): boolean {
+  hasRole(requiredRoles: string[]): boolean {
     const userRoles = this.getRoles();
-    if (Array.isArray(roles)) {
-      return roles.some(role => userRoles.includes(role));
-    } else {
-      return userRoles.includes(roles);
-    }
+    return requiredRoles.some(role => userRoles.includes(role));
   }
+  
   
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
